@@ -1,0 +1,3 @@
+Naszym pomys³em na projekt jest stworzenie katalogu bibliotecznego. Trzy g³ówne funkcjonalnoœci to: logowanie i rejestracja, wykonywanie operacji na ksi¹¿kach (np. dodawanie nowych, rezerwacja) oraz ranking najaktywniejszych czytelników i najpopularniejszych ksi¹¿ek. W projekcie wykorzystamy technologie WPF.
+
+Podzia³ zadañ: Dorota Tomczak zajmie siê …, a Anna Malizjusz...
