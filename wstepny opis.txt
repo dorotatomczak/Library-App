@@ -1,3 +1,5 @@
-Naszym pomys�em na projekt jest stworzenie katalogu bibliotecznego. Trzy g��wne funkcjonalno�ci to: logowanie i rejestracja, wykonywanie operacji na ksi��kach (np. dodawanie nowych, rezerwacja) oraz ranking najaktywniejszych czytelnik�w i najpopularniejszych ksi��ek. W projekcie wykorzystamy technologie WPF.
+Naszym pomysłem na projekt jest stworzenie katalogu bibliotecznego. Trzy główne funkcjonalności to: logowanie i rejestracja, wykonywanie operacji na książkach (np. dodawanie nowych, rezerwacja) oraz ranking najaktywniejszych czytelników i najpopularniejszych książek. W projekcie wykorzystamy technologie WPF.
 
-Podzia� zada�: Dorota Tomczak zajmie si� �, a Anna Malizjusz...
+Podział zadań: Dorota Tomczak zajmie się …, a Anna Malizjusz...
+
+Edit: Dodatkowo będzie możliwość zdobycia punktów akywności w minigrze - tetris (płynne opadanie i przesuwanie klocków, kolejne poziomy, po każdym propozycja książki wybranej dzięki analizie poprzednio przeczytanych książek). Możliwość gry multiplayer (dwie gry na ekranie, obsługa oddzielnymi klawiszami z jednego komputera).
