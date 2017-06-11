@@ -1,3 +1,3 @@
-Naszym pomys³em na projekt jest stworzenie katalogu bibliotecznego. Trzy g³ówne funkcjonalnoœci to: logowanie i rejestracja, wykonywanie operacji na ksi¹¿kach (np. dodawanie nowych, rezerwacja) oraz ranking najaktywniejszych czytelników i najpopularniejszych ksi¹¿ek. W projekcie wykorzystamy technologie WPF.
+Naszym pomys³em na projekt jest stworzenie katalogu bibliotecznego. Trzy g³ówne funkcjonalnoœci to: logowanie i rejestracja, wykonywanie operacji na ksi¹¿kach (np. dodawanie nowych, rezerwacja) oraz ranking najaktywniejszych czytelników i najpopularniejszych ksi¹¿ek. W projekcie wykorzystamy technologiê WPF.
 
-Podzia³ zadañ: Dorota Tomczak zajmie siê …, a Anna Malizjusz...
+Podzia³ zadañ: Dorota Tomczak zajmie siê metodami zwi¹zanymi z ksi¹¿kami, a Anna Malizjusz metodami zwi¹zanymi z u¿ytkownikami.
