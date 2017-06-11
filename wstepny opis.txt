@@ -1,3 +1,5 @@
 Naszym pomys³em na projekt jest stworzenie katalogu bibliotecznego. Trzy g³ówne funkcjonalnoœci to: logowanie i rejestracja, wykonywanie operacji na ksi¹¿kach (np. dodawanie nowych, rezerwacja) oraz ranking najaktywniejszych czytelników i najpopularniejszych ksi¹¿ek. W projekcie wykorzystamy technologiê WPF.
 
 Podzia³ zadañ: Dorota Tomczak zajmie siê metodami zwi¹zanymi z ksi¹¿kami, a Anna Malizjusz metodami zwi¹zanymi z u¿ytkownikami.
+
+Edit: Dodatkowo bêdzie mo¿liwoœæ zdobycia punktów akywnoœci w minigrze - tetris (p³ynne opadanie i przesuwanie klocków, kolejne poziomy, po ka¿dym propozycja ksi¹¿ki wybranej dziêki analizie poprzednio przeczytanych ksi¹¿ek). Mo¿liwoœængry multiplayer (dwie gry na ekranie, obs³ugaoddzielnymi klawiszami z jednego komputera).
