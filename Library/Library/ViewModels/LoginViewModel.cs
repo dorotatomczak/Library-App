@@ -1,0 +1,7 @@
+﻿
+namespace Library
+{
+    class LoginViewModel
+    {
+    }
+}

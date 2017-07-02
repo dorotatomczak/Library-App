@@ -1,0 +1,61 @@
+﻿<Window x:Class="Library.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        Icon="Images/Logo/logo-small.png"
+        WindowStartupLocation="CenterScreen"
+        Title="Library" Height="480" Width="640">
+
+    <Window.Resources>
+
+        <DataTemplate DataType="{x:Type local:LoginViewModel}">
+            <local:LoginView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:RegisterViewModel}">
+            <local:RegisterView/>
+        </DataTemplate>
+
+    </Window.Resources>
+
+    <DockPanel LastChildFill="True">
+
+        <!--Navigation menu on the top-->
+        <Grid x:Name="navigation" DockPanel.Dock="Top">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock
+                    Text="LOGO"
+                    Padding="15"
+                    FontFamily="{StaticResource LatoBold}"
+                    Foreground="{StaticResource BurgundyBrush}"
+                    FontSize="{StaticResource FontSizeLarge}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <Button 
+                    Content="Logowanie"
+                    Command="{Binding LoginCommand}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <Button Content="Rejestracja" Command="{Binding RegisterCommand}"></Button>
+            </StackPanel>
+
+        </Grid>
+
+        <!--Application content-->
+        <ContentControl x:Name="Pages" DockPanel.Dock="Bottom"  Content="{Binding SelectedViewModel}"/>
+
+    </DockPanel>
+
+</Window>
