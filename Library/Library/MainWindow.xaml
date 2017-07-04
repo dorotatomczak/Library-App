@@ -31,27 +31,40 @@
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
                 <TextBlock
-                    Text="LOGO"
+                    Text="BIBLIOTEKA online"
                     Padding="15"
                     FontFamily="{StaticResource LatoBold}"
                     Foreground="{StaticResource BurgundyBrush}"
-                    FontSize="{StaticResource FontSizeLarge}"/>
+                    FontSize="{StaticResource FontSizeRegular}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Button 
-                    Content="Logowanie"
-                    Command="{Binding LoginCommand}"/>
+                <Button
+                Margin="10"
+                Padding="10"
+                Content="Gra">
+                </Button>
             </StackPanel>
 
             <StackPanel Grid.Column="2">
                 <Button
-                    Content="Rejestracja"
-                    Command="{Binding RegisterCommand}"></Button>
+                Margin="10"
+                Padding="10"
+                Content="Konto">
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3">
+                <Button
+                Margin="10"
+                Padding="10"
+                Content="Książki">
+                </Button>
             </StackPanel>
 
         </Grid>

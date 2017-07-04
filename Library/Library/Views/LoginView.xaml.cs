@@ -1,19 +1,26 @@
 ﻿
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
+
 
 namespace Library
 {
     /// <summary>
     /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+	public partial class LoginView : UserControl, IHavePassword
     {
-
         public LoginView()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel();
+        }
+
+        public System.Security.SecureString Password
+        {
+            get
+            {
+                return txtPassword.SecurePassword;
+            }
         }
     }
 }
