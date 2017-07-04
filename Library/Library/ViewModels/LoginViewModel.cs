@@ -3,5 +3,6 @@ namespace Library
 {
     class LoginViewModel
     {
+        
     }
 }

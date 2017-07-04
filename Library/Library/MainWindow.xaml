@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Icon="Images/Logo/logo-small.png"
         WindowStartupLocation="CenterScreen"
-        Title="Library" Height="480" Width="640">
+        Title="Library" Height="480" Width="640"
+        x:Name="root">
 
     <Window.Resources>
 
@@ -48,7 +49,9 @@
             </StackPanel>
 
             <StackPanel Grid.Column="2">
-                <Button Content="Rejestracja" Command="{Binding RegisterCommand}"></Button>
+                <Button
+                    Content="Rejestracja"
+                    Command="{Binding RegisterCommand}"></Button>
             </StackPanel>
 
         </Grid>

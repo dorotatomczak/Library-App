@@ -10,6 +10,8 @@ namespace Library
         public ICommand RegisterCommand { get; set; }
         private object selectedViewModel;
 
+        public static NavigationViewModel Instance { get; private set; }
+
         public object SelectedViewModel
         {
             get { return selectedViewModel; }
@@ -17,9 +19,11 @@ namespace Library
         }
 
         public NavigationViewModel()
-        {
+        {   
             LoginCommand = new BaseCommand(OpenLogin);
             RegisterCommand = new BaseCommand(OpenRegister);
+            selectedViewModel = new LoginViewModel();
+            Instance = this;
         }
 
         private void OpenLogin(object obj)
@@ -36,10 +40,7 @@ namespace Library
 
         private void OnPropertyChanged(string propName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
     }
