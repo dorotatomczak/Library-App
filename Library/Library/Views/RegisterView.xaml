@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Library"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             x:Name="This"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="{StaticResource BackgroundLightBrush}">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,-10,0,10">
@@ -33,31 +34,39 @@
                             FontFamily="{StaticResource LatoRegular}"
                             FontSize="{StaticResource FontSizeSmall}"
                             Margin="0 10 0 0"/>
-                        <TextBox Name="Login" Padding="2"/>
+                        <TextBox
+                            x:Name="Login"
+                            Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Padding="2"/>
 
                         <Label 
                             Content="E-mail"
                             FontFamily="{StaticResource LatoRegular}"
                             FontSize="{StaticResource FontSizeSmall}"
                             Margin="0 10 0 0"/>
-                        <TextBox Name="Email" Padding="2"/>
+                        <TextBox
+                            x:Name="Email"
+                            Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Padding="2"/>
 
                         <Label 
                             Content="Hasło"
                             FontFamily="{StaticResource LatoRegular}"
                             FontSize="{StaticResource FontSizeSmall}"
                             Margin="0 10 0 0"/>
-                        <PasswordBox Name="Password" Padding="2"/>
+                        <PasswordBox x:Name="txtPassword" Padding="2"/>
 
                         <Label 
                             Content="Powtórz Hasło"
                             FontFamily="{StaticResource LatoRegular}"
                             FontSize="{StaticResource FontSizeSmall}"
                             Margin="0 10 0 0"/>
-                        <PasswordBox Name="Password2" Padding="2"/>
+                        <PasswordBox x:Name="RepeatedPassword" Padding="2"/>
 
                         <Button
-                            Name="Submit"
+                            x:Name="Submit"
+                            CommandParameter="{Binding ElementName=This}"
+                            Command="{Binding SubmitCommand}"
                             Content="Zarejestruj się"
                             HorizontalAlignment="Center"
                             Margin="0 20 0 0"/>
