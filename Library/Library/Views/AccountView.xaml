@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="Library.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Library"
+             mc:Ignorable="d"
+             x:Name="This"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <Border Margin="20 20 0 0">
+                    <Image
+                        MaxHeight="200"
+                        Source="/Library;component/Images/User/defaultuser-burgundy.png" />
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <TextBlock
+                    Margin="0 20 0 0"
+                    Text="{Binding Welcome, UpdateSourceTrigger=PropertyChanged}"
+                    FontFamily="{StaticResource LatoRegular}"
+                    FontSize="{StaticResource FontSizeLarge}"
+                    Foreground="{StaticResource BurgundyBrush}"/>
+
+                <TextBlock
+                    Margin="0 5 0 0"
+                    Text="Twoje punkty: "
+                    FontFamily="{StaticResource LatoRegular}"
+                    FontSize="{StaticResource FontSizeSmall}"
+                    Foreground="{StaticResource BurgundyBrush}"/>
+                
+                <TextBlock
+                    Margin="0 5 0 0"
+                    Text="Miejsce w rankingu: "
+                    FontFamily="{StaticResource LatoRegular}"
+                    FontSize="{StaticResource FontSizeSmall}"
+                    Foreground="{StaticResource BurgundyBrush}"/>
+
+                <Button
+                    CommandParameter="{Binding ElementName=This}"
+                    Command="{Binding LogOutCommand}"
+                    MaxWidth="100"
+                    Content="Wyloguj"
+                    Padding="10"/>
+            </StackPanel>
+        </Grid>
+        
+        <TextBlock
+            Margin="20 15 0 0"
+            Text="Wypożyczone książki"
+            FontFamily="{StaticResource LatoRegular}"
+            FontSize="{StaticResource FontSizeRegular}"
+            Foreground="{StaticResource BurgundyBrush}"
+            />
+
+    </StackPanel>
+</UserControl>

@@ -11,9 +11,9 @@ namespace Library
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new NavigationViewModel();
-            /*string connectionString = "SERVER=localhost; DATABASE=test_db; UID=root;PASSWORD=;";
-            MySqlConnection connection = new MySqlConnection(connectionString);*/
+            var viewModel = new MainNavigationViewModel();
+            viewModel.RequestClose += this.Close;
+            this.DataContext = viewModel;
         }
     }
 }

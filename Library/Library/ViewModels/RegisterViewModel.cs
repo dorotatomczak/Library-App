@@ -82,11 +82,27 @@ namespace Library
                 if (connection.State == ConnectionState.Closed)
                     connection.Open();
 
-                string query = "insert into user_tbl (Login, Email, Password) values('"+this.UserName+"', '"+this.Email+"', '"+this.PasswordInVM+"')";
+                String query = "SELECT COUNT(1) FROM user_tbl WHERE Login=@Login";
 
                 SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Saved");
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@Login", UserName);
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                if (count == 1)
+                {
+                    MessageBox.Show("This login is already taken.");
+                }
+                else
+                {
+                    query = "insert into user_tbl (Login, Email, Password) values('" + this.UserName + "', '" + this.Email + "', '" + this.PasswordInVM + "')";
+
+                    cmd = new SqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Your registration was successful.");
+                }
+
             }
             catch (Exception ex)
             {

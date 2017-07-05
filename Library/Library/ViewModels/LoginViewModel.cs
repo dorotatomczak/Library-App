@@ -83,11 +83,12 @@ namespace Library
 
                 if (count == 1)
                 {
-                    MessageBox.Show("You logged in");
-                    /*MainWindow dashboard = new MainWindow();
-                    dashboard.Show();
-                    var myWindow = Window.GetWindow(this);
-                    myWindow.Close();*/
+                    User.Username = UserName;
+
+                    MainWindow newWindow = new MainWindow();
+                    newWindow.Show();
+                    var myWindow = Window.GetWindow(parameter as LoginView);
+                    myWindow.Close();
                 }
                 else
                 {

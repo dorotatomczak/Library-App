@@ -58,13 +58,6 @@
                             Margin="0 10 0 0"/>
                         <PasswordBox x:Name="txtPassword" Padding="2"/>
 
-                        <Label 
-                            Content="Powtórz Hasło"
-                            FontFamily="{StaticResource LatoRegular}"
-                            FontSize="{StaticResource FontSizeSmall}"
-                            Margin="0 10 0 0"/>
-                        <PasswordBox x:Name="RepeatedPassword" Padding="2"/>
-
                         <Button
                             x:Name="Submit"
                             CommandParameter="{Binding ElementName=This}"
@@ -78,7 +71,7 @@
 
                 <Button
                     Command="{Binding DataContext.LoginCommand, 
-                        RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"
+                        RelativeSource={RelativeSource AncestorType={x:Type local:StartWindow}}}"
                     Style="{StaticResource TextButton}"
                     Content="Posiadasz już konto? Zaloguj się."
                     HorizontalAlignment="Center" />
