@@ -22,6 +22,8 @@
                     Width="260"
                     Height="auto">
 
+
+                    <!--Register form-->
                     <StackPanel>
                         <TextBlock
                             Text="Rejestracja"

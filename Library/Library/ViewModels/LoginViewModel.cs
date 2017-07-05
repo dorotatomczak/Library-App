@@ -2,8 +2,11 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
@@ -48,6 +51,10 @@ namespace Library
             }
         }
 
+        /// <summary>
+        /// Signing in to the account
+        /// </summary>
+        /// <param name="parameter"></param>
         private void Submit(object parameter)
         {
             var passwordContainer = parameter as IHavePassword;
@@ -55,6 +62,7 @@ namespace Library
             {
                 var secureString = passwordContainer.Password;
                 PasswordInVM = ConvertToUnsecureString(secureString);
+                PasswordInVM = sha256_hash(PasswordInVM);
             }
 
             SqlConnection connection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=LibraryDB; Integrated Security=True;");
@@ -112,6 +120,16 @@ namespace Library
             finally
             {
                 Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
+            }
+        }
+
+        public static String sha256_hash(String value)
+        {
+            using (SHA256 hash = SHA256Managed.Create())
+            {
+                return String.Concat(hash
+                  .ComputeHash(Encoding.UTF8.GetBytes(value))
+                  .Select(item => item.ToString("x2")));
             }
         }
     }
