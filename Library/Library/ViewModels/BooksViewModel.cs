@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Library
 {
@@ -15,9 +16,12 @@ namespace Library
         public BooksViewModel()
         {
             LoadBooks();
+            ReserveCommand = new RelayCommand(ReserveBook);
         }
 
         private ObservableCollection<Book> _books;
+        private Book _selectedbook;
+
         public ObservableCollection<Book> Books
         {
             get { return _books; }
@@ -31,7 +35,6 @@ namespace Library
             }
         }
 
-        private Book _selectedbook;
         public Book SelectedBook
         {
             get { return _selectedbook; }
@@ -40,6 +43,27 @@ namespace Library
             {
                 _selectedbook = value;
                 OnPropertyChanged("SelectedBook");
+            }
+        }
+
+        public ICommand ReserveCommand
+        {
+            get;
+            private set;
+        }
+
+        private void ReserveBook(object parameter)
+        {
+            if (SelectedBook != null)
+            {
+                int bookID = SelectedBook.BookID;
+                User user = new User();
+                if (user.ReserveBook(bookID))
+                {
+                    SelectedBook.Reserved = 1;
+                    SelectedBook.updateDatabase();
+                    LoadBooks();
+                }
             }
         }
 
@@ -58,7 +82,7 @@ namespace Library
                 if (connection.State == ConnectionState.Closed)
                     connection.Open();
 
-                string query = "SELECT * FROM book_tbl";
+                string query = "SELECT * FROM book_tbl WHERE Reserved=0 AND Borrowed=0";
                 SqlCommand cmd = new SqlCommand(query, connection);
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);

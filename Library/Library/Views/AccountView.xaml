@@ -32,35 +32,127 @@
                     Foreground="{StaticResource BurgundyBrush}"/>
 
                 <TextBlock
-                    Margin="0 5 0 0"
-                    Text="Twoje punkty: "
+                    Margin="0 5 5 0"
+                    TextWrapping="Wrap"
+                    Text="Biblioteka online to aplikacja, która umożliwi Ci rezerwowanie wybranych książek, abyś był pewien, że nikt inny nie ubiegnie Cię w wypożyczeniu danej pozycji."
                     FontFamily="{StaticResource LatoRegular}"
-                    FontSize="{StaticResource FontSizeSmall}"
-                    Foreground="{StaticResource BurgundyBrush}"/>
-                
-                <TextBlock
-                    Margin="0 5 0 0"
-                    Text="Miejsce w rankingu: "
-                    FontFamily="{StaticResource LatoRegular}"
-                    FontSize="{StaticResource FontSizeSmall}"
-                    Foreground="{StaticResource BurgundyBrush}"/>
+                    FontSize="{StaticResource FontSizeSmall}"/>
 
-                <Button
-                    CommandParameter="{Binding ElementName=This}"
-                    Command="{Binding LogOutCommand}"
-                    MaxWidth="100"
-                    Content="Wyloguj"
-                    Padding="10"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="1.5*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button
+                        Grid.Column="0"
+                        CommandParameter="{Binding ElementName=This}"
+                        Command="{Binding LogOutCommand}"
+                        MaxWidth="100"
+                        Content="Wyloguj"
+                        Padding="10"/>
+
+                    <Button
+                        Grid.Column="1"
+                        CommandParameter="{Binding ElementName=This}"
+                        Command="{Binding ChangePasswordCommand}"
+                        MaxWidth="150"
+                        Content="Zmień hasło"
+                        Padding="10"/>
+                </Grid>
+
             </StackPanel>
         </Grid>
         
         <TextBlock
             Margin="20 15 0 0"
-            Text="Wypożyczone książki"
+            Text="Zarezerwowane książki"
             FontFamily="{StaticResource LatoRegular}"
             FontSize="{StaticResource FontSizeRegular}"
             Foreground="{StaticResource BurgundyBrush}"
             />
+
+        <Grid>
+            <Border
+            Margin="10 20 10 0"
+            Background="White"
+            MaxHeight="300"
+            CornerRadius="10">
+                <ScrollViewer>
+                    <ListBox
+                     ItemsSource="{Binding Books}"
+                     SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}"
+                     HorizontalContentAlignment="Stretch"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <DockPanel LastChildFill="True">
+                                    <Grid DockPanel.Dock="Top">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                    Grid.Column="0"
+                                    FontFamily="{StaticResource LatoRegular}"
+                                    FontSize="{StaticResource FontSizeSmall}"
+                                    Foreground="{StaticResource BurgundyBrush}"
+                                    >Tytuł</Label>
+                                        <Label 
+                                    Grid.Column="1"
+                                    FontFamily="{StaticResource LatoRegular}"
+                                    FontSize="{StaticResource FontSizeSmall}"
+                                    Foreground="{StaticResource BurgundyBrush}"
+                                    >Autor</Label>
+                                        <Label 
+                                    Grid.Column="2"
+                                    FontFamily="{StaticResource LatoRegular}"
+                                    FontSize="{StaticResource FontSizeSmall}"
+                                    Foreground="{StaticResource BurgundyBrush}"
+                                    >Gatunek</Label>
+                                        <Label 
+                                    Grid.Column="3"
+                                    FontFamily="{StaticResource LatoRegular}"
+                                    FontSize="{StaticResource FontSizeSmall}"
+                                    Foreground="{StaticResource BurgundyBrush}"
+                                    >Ilość stron</Label>
+                                    </Grid>
+                                    <ItemsPresenter></ItemsPresenter>
+                                </DockPanel>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding Title}"/>
+                                    <TextBlock Text="{Binding Author}" Grid.Column="1"/>
+                                    <TextBlock Text="{Binding Genre}" Grid.Column="2"/>
+                                    <TextBlock Text="{Binding Pages}" Grid.Column="3"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <Button
+            CommandParameter="{Binding ElementName=This}"
+            Command="{Binding CancelReservation}"
+            MaxWidth="200"
+            Content="Anuluj rezerwację"
+            Margin="0 20 0 0"
+            Padding="10"/>
 
     </StackPanel>
 </UserControl>

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Library
 {
@@ -13,8 +16,8 @@ namespace Library
         private string _author;
         private int _pages;
         private string _genre;
-        private bool _borrowed;
-        private bool _reserved;
+        private int _borrowed;
+        private int _reserved;
 
         #region Gets & Sets
 
@@ -48,18 +51,51 @@ namespace Library
             set { _genre = value; }
         }
 
-        public bool Borrowed
+        public int Borrowed
         {
             get { return _borrowed; }
             set { _borrowed = value; }
         }
 
-        public bool Reserved
+        public int Reserved
         {
             get { return _reserved; }
             set { _reserved = value; }
         }
 
         #endregion
+
+        public void updateDatabase()
+        {
+            SqlConnection connection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=LibraryDB; Integrated Security=True;");
+
+            try
+            {
+                if (connection.State == ConnectionState.Closed)
+                    connection.Open();
+
+                //check if user can reserve another book
+                string query = query = "UPDATE book_tbl SET Title = @Title, Author = @Author, Pages = @Pages," + 
+                    " Genre = @Genre, Reserved = @Reserved, Borrowed = @Borrowed WHERE BookID=@BookID";
+                SqlCommand cmd = new SqlCommand(query, connection);
+
+                cmd.Parameters.AddWithValue("@BookID", this.BookID);
+                cmd.Parameters.AddWithValue("@Title", this.Title);
+                cmd.Parameters.AddWithValue("@Author", this.Author);
+                cmd.Parameters.AddWithValue("@Pages", this.Pages);
+                cmd.Parameters.AddWithValue("@Genre", this.Genre);
+                cmd.Parameters.AddWithValue("@Reserved", this.Reserved);
+                cmd.Parameters.AddWithValue("@Borrowed", this.Borrowed);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

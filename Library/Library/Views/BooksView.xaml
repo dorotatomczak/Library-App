@@ -92,7 +92,7 @@
 
         <Button
             CommandParameter="{Binding ElementName=This}"
-            Command="{Binding LogOutCommand}"
+            Command="{Binding ReserveCommand}"
             MaxWidth="120"
             Content="Zarezerwuj"
             Padding="10"/>
