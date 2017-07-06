@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              x:Name="This"
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
+    <StackPanel Background="{StaticResource BackgroundLightBrush}">
         
         <Grid>
             <Grid.ColumnDefinitions>

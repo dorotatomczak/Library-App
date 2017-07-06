@@ -7,12 +7,17 @@
         mc:Ignorable="d"
         Icon="Images/Logo/logo-small.png"
         WindowStartupLocation="CenterScreen"
-        Title="Library" Height="480" Width="640">
+        Title="Library" Height="480" Width="640"
+        x:Name="This">
 
     <Window.Resources>
 
         <DataTemplate DataType="{x:Type local:AccountViewModel}">
             <local:AccountView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:BooksViewModel}">
+            <local:BooksView/>
         </DataTemplate>
 
     </Window.Resources>
@@ -40,7 +45,7 @@
 
             <StackPanel Grid.Column="1">
                 <Button
-                    Command="{Binding AccountCommand}"
+                    Command="{Binding ShowAccountCommand}"
                     Margin="10"
                     Padding="10"
                     Content="Konto">
@@ -49,6 +54,7 @@
 
             <StackPanel Grid.Column="2">
                 <Button
+                    Command="{Binding ShowBooksCommand}"
                     Margin="10"
                     Padding="10"
                     Content="Książki">
@@ -67,5 +73,8 @@
 
         <!--Application content-->
         <ContentControl x:Name="Pages" DockPanel.Dock="Bottom"  Content="{Binding SelectedViewModel}"/>
+
     </DockPanel>
+
 </Window>
+

@@ -8,7 +8,7 @@
         Icon="Images/Logo/logo-small.png"
         WindowStartupLocation="CenterScreen"
         Title="Library" Height="480" Width="640"
-        x:Name="root">
+        x:Name="This">
 
     <Window.Resources>
 

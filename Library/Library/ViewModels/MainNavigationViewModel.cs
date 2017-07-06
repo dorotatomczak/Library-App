@@ -1,19 +1,19 @@
 ﻿
 using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Library
 {
     class MainNavigationViewModel : BaseNavigationViewModel
     {
         public ICommand ShowAccountCommand { get; set; }
+        public ICommand ShowBooksCommand { get; set; }
 
         public static MainNavigationViewModel Instance { get; private set; }
 
         public MainNavigationViewModel()
         {
             ShowAccountCommand = new BaseCommand(OpenAccount);
-
+            ShowBooksCommand = new BaseCommand(OpenBooks);
             selectedViewModel = new AccountViewModel();
 
             Instance = this;
@@ -21,7 +21,12 @@ namespace Library
 
         private void OpenAccount(object obj)
         {
-            selectedViewModel = new AccountViewModel();
+            SelectedViewModel = new AccountViewModel();
+        }
+
+        private void OpenBooks(object obj)
+        {
+            SelectedViewModel = new BooksViewModel();
         }
     }
 }

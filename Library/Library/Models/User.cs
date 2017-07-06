@@ -8,8 +8,6 @@ namespace Library
 {
     public class User
     {
-        private string _username;
-
         public static string Username
         {
             get;

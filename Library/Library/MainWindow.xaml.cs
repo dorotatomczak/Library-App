@@ -11,9 +11,7 @@ namespace Library
         public MainWindow()
         {
             InitializeComponent();
-            var viewModel = new MainNavigationViewModel();
-            viewModel.RequestClose += this.Close;
-            this.DataContext = viewModel;
+            this.DataContext = new MainNavigationViewModel();
         }
     }
 }
