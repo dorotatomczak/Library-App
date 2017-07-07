@@ -43,21 +43,13 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="1.5*" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <Button
                         Grid.Column="0"
                         CommandParameter="{Binding ElementName=This}"
                         Command="{Binding LogOutCommand}"
                         MaxWidth="100"
                         Content="Wyloguj"
-                        Padding="10"/>
-
-                    <Button
-                        Grid.Column="1"
-                        CommandParameter="{Binding ElementName=This}"
-                        Command="{Binding ChangePasswordCommand}"
-                        MaxWidth="150"
-                        Content="Zmień hasło"
                         Padding="10"/>
                 </Grid>
 
@@ -148,7 +140,7 @@
 
         <Button
             CommandParameter="{Binding ElementName=This}"
-            Command="{Binding CancelReservation}"
+            Command="{Binding CancelReservationCommand}"
             MaxWidth="200"
             Content="Anuluj rezerwację"
             Margin="0 20 0 0"

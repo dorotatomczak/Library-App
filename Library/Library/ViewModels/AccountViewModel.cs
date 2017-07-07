@@ -17,6 +17,12 @@ namespace Library
             private set;
         }
 
+        public ICommand CancelReservationCommand
+        {
+            get;
+            private set;
+        }
+
         private string _username;
 
         public string UserName
@@ -52,11 +58,25 @@ namespace Library
             }
         }
 
+        private Book _selectedbook;
+
+        public Book SelectedBook
+        {
+            get { return _selectedbook; }
+
+            set
+            {
+                _selectedbook = value;
+                OnPropertyChanged("SelectedBook");
+            }
+        }
+
         public AccountViewModel()
         {
             UserName = User.Username;
             Welcome = $"Witaj, {UserName}!";
             LogOutCommand = new RelayCommand(LogOut);
+            CancelReservationCommand = new RelayCommand(CancelReservation);
             LoadBooks();
         }
 
@@ -66,6 +86,19 @@ namespace Library
             newWindow.Show();
             var myWindow = Window.GetWindow(parameter as AccountView);
             myWindow.Close();
+        }
+
+        private void CancelReservation(object parameter)
+        {
+            if (SelectedBook != null)
+            {
+                int bookID = SelectedBook.BookID;
+                User user = new User();
+                user.CancelReservation(bookID);
+                SelectedBook.Reserved = 0;
+                SelectedBook.updateDatabase();
+                LoadBooks();
+            }
         }
 
         public DataTable GetReservedBooks()
