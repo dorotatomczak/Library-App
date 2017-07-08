@@ -71,7 +71,7 @@
 
                 <Button
                     Command="{Binding DataContext.LoginCommand, 
-                        RelativeSource={RelativeSource AncestorType={x:Type local:StartWindow}}}"
+                        RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"
                     Style="{StaticResource TextButton}"
                     Content="Posiadasz już konto? Zaloguj się."
                     HorizontalAlignment="Center" />

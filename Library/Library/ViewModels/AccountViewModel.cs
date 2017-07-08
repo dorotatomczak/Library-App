@@ -71,8 +71,11 @@ namespace Library
             }
         }
 
-        public AccountViewModel()
+        private NavigationViewModel _navigationViewModel;
+
+        public AccountViewModel(NavigationViewModel nvm)
         {
+            _navigationViewModel = nvm;
             UserName = User.Username;
             Welcome = $"Witaj, {UserName}!";
             LogOutCommand = new RelayCommand(LogOut);
@@ -82,10 +85,9 @@ namespace Library
 
         private void LogOut(object parameter)
         {
-            StartWindow newWindow = new StartWindow();
-            newWindow.Show();
-            var myWindow = Window.GetWindow(parameter as AccountView);
-            myWindow.Close();
+            UserName = string.Empty;
+            _navigationViewModel.SelectedViewModel = new LoginViewModel(_navigationViewModel);
+            _navigationViewModel.SelectedMenu = new StartMenuViewModel(_navigationViewModel);
         }
 
         private void CancelReservation(object parameter)

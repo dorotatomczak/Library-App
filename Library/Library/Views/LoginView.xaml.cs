@@ -12,7 +12,6 @@ namespace Library
         public LoginView()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
         }
 
         public System.Security.SecureString Password

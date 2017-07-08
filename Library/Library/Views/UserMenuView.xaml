@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Library.UserMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Library"
+             mc:Ignorable="d"
+             x:Name="This"
+             d:DesignHeight="65" d:DesignWidth="640">
+    <StackPanel Background="White">
+        <Grid x:Name="navigation">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock
+                    Text="BIBLIOTEKA online"
+                    Padding="15"
+                    FontFamily="{StaticResource LatoBold}"
+                    Foreground="{StaticResource BurgundyBrush}"
+                    FontSize="{StaticResource FontSizeRegular}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <Button
+                    Command="{Binding ShowAccountCommand}"
+                    Margin="10"
+                    Padding="10"
+                    Content="Konto">
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <Button
+                    Command="{Binding ShowBooksCommand}"
+                    Margin="10"
+                    Padding="10"
+                    Content="Książki">
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3">
+                <Button
+                    Margin="10"
+                    Padding="10"
+                    Content="Gra">
+                </Button>
+            </StackPanel>
+
+        </Grid>
+    </StackPanel>
+</UserControl>

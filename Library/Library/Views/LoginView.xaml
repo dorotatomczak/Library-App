@@ -63,7 +63,7 @@
                 <!--Go to Register Page-->
                 <Button
                     Command="{Binding DataContext.RegisterCommand, 
-                        RelativeSource={RelativeSource AncestorType={x:Type local:StartWindow}}}"
+                        RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"
                     Style="{StaticResource TextButton}"
                     Content="Nie masz jeszcze konta? Zarejestruj się."
                     HorizontalAlignment="Center" />

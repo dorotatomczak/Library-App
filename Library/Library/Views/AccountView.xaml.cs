@@ -23,7 +23,6 @@ namespace Library
         public AccountView()
         {
             InitializeComponent();
-            DataContext = new AccountViewModel();
         }
     }
 }

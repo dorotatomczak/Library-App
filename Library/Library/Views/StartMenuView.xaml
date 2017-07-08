@@ -1,31 +1,13 @@
-﻿<Window x:Class="Library.StartWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Library"
-        mc:Ignorable="d"
-        Icon="Images/Logo/logo-small.png"
-        WindowStartupLocation="CenterScreen"
-        Title="Library" Height="480" Width="640"
-        x:Name="This">
-
-    <Window.Resources>
-
-        <DataTemplate DataType="{x:Type local:LoginViewModel}">
-            <local:LoginView/>
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type local:RegisterViewModel}">
-            <local:RegisterView/>
-        </DataTemplate>
-
-    </Window.Resources>
-
-    <DockPanel LastChildFill="True">
-
-        <!--Navigation menu on the top-->
-        <Grid x:Name="navigation" DockPanel.Dock="Top">
+﻿<UserControl x:Class="Library.StartMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="65" d:DesignWidth="640">
+    <StackPanel Background="White">
+        <Grid x:Name="navigation">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
@@ -61,10 +43,5 @@
             </StackPanel>
 
         </Grid>
-
-        <!--Application content-->
-        <ContentControl x:Name="Pages" DockPanel.Dock="Bottom"  Content="{Binding SelectedViewModel}"/>
-
-    </DockPanel>
-
-</Window>
+    </StackPanel>
+</UserControl>

@@ -17,8 +17,11 @@ namespace Library
         private string _PasswordInVM;
         private string _username;
 
-        public LoginViewModel()
+        private NavigationViewModel _navigationViewModel;
+
+        public LoginViewModel(NavigationViewModel nvm)
         {
+            _navigationViewModel = nvm;
             SubmitCommand = new RelayCommand(Submit);
         }
 
@@ -83,12 +86,28 @@ namespace Library
 
                 if (count == 1)
                 {
-                    User.Username = UserName;
+                    query = "SELECT * FROM user_tbl WHERE Login=@Login AND Password=@Password";
+                    cmd = new SqlCommand(query, connection);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Login", UserName);
+                    cmd.Parameters.AddWithValue("@Password", PasswordInVM);
 
-                    MainWindow newWindow = new MainWindow();
-                    newWindow.Show();
-                    var myWindow = Window.GetWindow(parameter as LoginView);
-                    myWindow.Close();
+                    SqlDataReader myReader = cmd.ExecuteReader();
+                    while (myReader.Read())
+                    {
+                        if ((string)myReader["Type"] == "Normal")
+                        {
+                            User.Username = UserName;
+                            _navigationViewModel.SelectedViewModel = new AccountViewModel(_navigationViewModel);
+                            _navigationViewModel.SelectedMenu = new UserMenuViewModel(_navigationViewModel);
+                        }
+                        else
+                        {
+
+                        }
+                    }
+
+                    myReader.Close();
                 }
                 else
                 {

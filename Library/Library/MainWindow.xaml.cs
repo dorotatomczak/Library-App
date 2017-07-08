@@ -11,7 +11,7 @@ namespace Library
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainNavigationViewModel();
+            this.DataContext = new NavigationViewModel();
         }
     }
 }

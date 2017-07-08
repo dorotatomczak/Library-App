@@ -96,7 +96,8 @@ namespace Library
                 }
                 else
                 {
-                    query = "insert into user_tbl (Login, Email, Password) values('" + this.UserName + "', '" + this.Email + "', '" + this.PasswordInVM + "')";
+                    query = "insert into user_tbl (Login, Email, Password, ReservedBook1, ReservedBook2, ReservedBook3, Type) values('" + this.UserName + 
+                        "', '" + this.Email + "', '" + this.PasswordInVM + "', 0, 0, 0, 'Normal')";
 
                     cmd = new SqlCommand(query, connection);
                     cmd.ExecuteNonQuery();
