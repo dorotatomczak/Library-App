@@ -86,6 +86,8 @@ namespace Library
 
                 if (count == 1)
                 {
+                    User.Username = UserName;
+
                     query = "SELECT * FROM user_tbl WHERE Login=@Login AND Password=@Password";
                     cmd = new SqlCommand(query, connection);
                     cmd.CommandType = CommandType.Text;
@@ -97,13 +99,15 @@ namespace Library
                     {
                         if ((string)myReader["Type"] == "Normal")
                         {
-                            User.Username = UserName;
+                            User.Type = "Normal";
                             _navigationViewModel.SelectedViewModel = new AccountViewModel(_navigationViewModel);
                             _navigationViewModel.SelectedMenu = new UserMenuViewModel(_navigationViewModel);
                         }
                         else
                         {
-
+                            User.Type = "Librarian";
+                            _navigationViewModel.SelectedViewModel = new EditBooksViewModel(_navigationViewModel);
+                            _navigationViewModel.SelectedMenu = new LibrarianMenuViewModel(_navigationViewModel);
                         }
                     }
 
@@ -111,7 +115,7 @@ namespace Library
                 }
                 else
                 {
-                    MessageBox.Show("Username or password is incorrect");
+                    MessageBox.Show("Login lub hasło są nieprawidłowe");
                 }
             }
             catch (Exception ex)

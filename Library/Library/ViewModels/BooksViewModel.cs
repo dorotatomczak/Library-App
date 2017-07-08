@@ -57,7 +57,7 @@ namespace Library
             if (SelectedBook != null)
             {
                 int bookID = SelectedBook.BookID;
-                User user = new User();
+                NormalUser user = new NormalUser();
                 if (user.ReserveBook(bookID))
                 {
                     SelectedBook.Reserved = 1;

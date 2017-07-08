@@ -85,7 +85,8 @@ namespace Library
 
         private void LogOut(object parameter)
         {
-            UserName = string.Empty;
+            User.Username = string.Empty;
+            User.Type = string.Empty;
             _navigationViewModel.SelectedViewModel = new LoginViewModel(_navigationViewModel);
             _navigationViewModel.SelectedMenu = new StartMenuViewModel(_navigationViewModel);
         }
@@ -95,7 +96,7 @@ namespace Library
             if (SelectedBook != null)
             {
                 int bookID = SelectedBook.BookID;
-                User user = new User();
+                NormalUser user = new NormalUser();
                 user.CancelReservation(bookID);
                 SelectedBook.Reserved = 0;
                 SelectedBook.updateDatabase();
@@ -118,7 +119,7 @@ namespace Library
                 if (connection.State == ConnectionState.Closed)
                     connection.Open();
 
-                User user = new User();
+                NormalUser user = new NormalUser();
                 int[] BooksIDs = new int[3];
                 user.getReservedBooks(BooksIDs);
 

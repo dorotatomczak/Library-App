@@ -19,6 +19,16 @@ namespace Library
         private int _borrowed;
         private int _reserved;
 
+        public Book()
+        {
+            Title = "nn";
+            Author = "nn";
+            Genre = "nn";
+            Pages = 0;
+            Reserved = 0;
+            Borrowed = 0;
+        }
+
         #region Gets & Sets
 
         public int BookID

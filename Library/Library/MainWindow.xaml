@@ -20,6 +20,10 @@
             <local:StartMenuView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type local:LibrarianMenuViewModel}">
+            <local:LibrarianMenuView/>
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type local:AccountViewModel}">
             <local:AccountView/>
         </DataTemplate>
@@ -34,6 +38,10 @@
 
         <DataTemplate DataType="{x:Type local:RegisterViewModel}">
             <local:RegisterView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:EditBooksViewModel}">
+            <local:EditBooksView/>
         </DataTemplate>
 
     </Window.Resources>

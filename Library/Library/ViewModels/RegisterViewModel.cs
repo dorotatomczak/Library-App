@@ -96,12 +96,16 @@ namespace Library
                 }
                 else
                 {
-                    query = "insert into user_tbl (Login, Email, Password, ReservedBook1, ReservedBook2, ReservedBook3, Type) values('" + this.UserName + 
-                        "', '" + this.Email + "', '" + this.PasswordInVM + "', 0, 0, 0, 'Normal')";
+                    query = "insert into user_tbl (Login, Email, Password, ReservedBook1, ReservedBook2, ReservedBook3, Type) values(@Login, @Email, @Password, 0, 0, 0, 'Normal')";
 
                     cmd = new SqlCommand(query, connection);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Login", this.UserName);
+                    cmd.Parameters.AddWithValue("@Email", this.Email);
+                    cmd.Parameters.AddWithValue("@Password", this.PasswordInVM);
+
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Your registration was successful.");
+                    MessageBox.Show("Rejestracja przebiegła pomyślnie. Możesz się zalogować.");
                 }
 
             }
