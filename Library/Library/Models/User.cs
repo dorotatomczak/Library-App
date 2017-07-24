@@ -8,6 +8,11 @@ namespace Library
             get;
             set;
         }
+        public static string Username2
+        {
+            get;
+            set;
+        }
 
         public static string Type
         {

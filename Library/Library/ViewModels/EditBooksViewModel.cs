@@ -93,7 +93,7 @@ namespace Library
                     //add new
                     else
                     {
-                        query = "insert into book_tbl (Title, Author, Pages, Genre, Reserve, Borrowed) values(@Title, @Author, @Pages, @Genre, 0, 0)";
+                        query = "insert into book_tbl (Title, Author, Pages, Genre, Reserved, Borrowed) values(@Title, @Author, @Pages, @Genre, 0, 0)";
                     }
 
                     cmd = new SqlCommand(query, connection);

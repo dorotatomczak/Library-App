@@ -11,6 +11,7 @@ namespace Library
     {
         public ICommand ShowAccountCommand { get; set; }
         public ICommand ShowBooksCommand { get; set; }
+        public ICommand ShowGameCommand { get; set; }
 
         private NavigationViewModel _navigationViewModel;
 
@@ -19,6 +20,7 @@ namespace Library
             _navigationViewModel = nvm;
             ShowAccountCommand = new BaseCommand(OpenAccount);
             ShowBooksCommand = new BaseCommand(OpenBooks);
+            ShowGameCommand = new BaseCommand(OpenGame);
         }
 
         private void OpenAccount(object obj)
@@ -29,6 +31,11 @@ namespace Library
         private void OpenBooks(object obj)
         {
             _navigationViewModel.SelectedViewModel = new BooksViewModel();
+        }
+
+        private void OpenGame(object obj)
+        {
+            _navigationViewModel.SelectedViewModel = new GameViewModel();
         }
     }
 }

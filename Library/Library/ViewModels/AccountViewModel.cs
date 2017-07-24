@@ -57,6 +57,20 @@ namespace Library
                 }
             }
         }
+        private ObservableCollection<Book> _borowwedBooks;
+
+        public ObservableCollection<Book> BorrowedBooks
+        {
+            get { return _borowwedBooks; }
+            set
+            {
+                if (_borowwedBooks != value)
+                {
+                    _borowwedBooks = value;
+                    OnPropertyChanged("BorrowedBooks");
+                }
+            }
+        }
 
         private Book _selectedbook;
 

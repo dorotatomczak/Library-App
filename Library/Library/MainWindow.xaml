@@ -43,7 +43,25 @@
         <DataTemplate DataType="{x:Type local:EditBooksViewModel}">
             <local:EditBooksView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:GameViewModel}">
+            <local:GameView/>
+        </DataTemplate>
+        <!--<DataTemplate DataType="{x:Type local:MultiplayerGameViewModel}">
+            <local:MultiplayerGameView/>
+        </DataTemplate>-->
+        <DataTemplate x:Key="DataTemplate_Level2">
+            <Label Height="3" Width="15" Background="{Binding}" BorderBrush="{Binding}" BorderThickness="1"  />
+        </DataTemplate>
 
+        <DataTemplate x:Key="DataTemplate_Level1">
+            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DataTemplate_Level2}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DataTemplate>
     </Window.Resources>
 
     <DockPanel LastChildFill="True">

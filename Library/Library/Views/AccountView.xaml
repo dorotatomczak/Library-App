@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Library"
              mc:Ignorable="d"
              x:Name="This"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="300">
     <StackPanel Background="{StaticResource BackgroundLightBrush}">
         
         <Grid>
@@ -55,7 +55,7 @@
 
             </StackPanel>
         </Grid>
-        
+
         <TextBlock
             Margin="20 15 0 0"
             Text="Zarezerwowane książki"
@@ -145,6 +145,86 @@
             Content="Anuluj rezerwację"
             Margin="0 20 0 0"
             Padding="10"/>
+        <TextBlock
+            Margin="20 15 0 0"
+            Text="Wypożyczone książki"
+            FontFamily="{StaticResource LatoRegular}"
+            FontSize="{StaticResource FontSizeRegular}"
+            Foreground="{StaticResource BurgundyBrush}"
+            />
 
+        <Grid>
+            <Border
+            Margin="10 20 10 0"
+            Background="White"
+            MaxHeight="300"
+            CornerRadius="10">
+                <ScrollViewer>
+                    <ListBox
+                     ItemsSource="{Binding BorrowedBooks}"
+                     HorizontalContentAlignment="Stretch"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <DockPanel LastChildFill="True">
+                                    <Grid DockPanel.Dock="Top">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                    Grid.Column="0"
+                                    FontFamily="{StaticResource LatoRegular}"
+                                    FontSize="{StaticResource FontSizeSmall}"
+                                    Foreground="{StaticResource BurgundyBrush}"
+                                    >Tytuł</Label>
+                                        <Label 
+                                    Grid.Column="1"
+                                    FontFamily="{StaticResource LatoRegular}"
+                                    FontSize="{StaticResource FontSizeSmall}"
+                                    Foreground="{StaticResource BurgundyBrush}"
+                                    >Autor</Label>
+                                        <Label 
+                                    Grid.Column="2"
+                                    FontFamily="{StaticResource LatoRegular}"
+                                    FontSize="{StaticResource FontSizeSmall}"
+                                    Foreground="{StaticResource BurgundyBrush}"
+                                    >Gatunek</Label>
+                                        <Label 
+                                    Grid.Column="3"
+                                    FontFamily="{StaticResource LatoRegular}"
+                                    FontSize="{StaticResource FontSizeSmall}"
+                                    Foreground="{StaticResource BurgundyBrush}"
+                                    >Ilość stron</Label>
+                                    </Grid>
+                                    <ItemsPresenter></ItemsPresenter>
+                                </DockPanel>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding Title}"/>
+                                    <TextBlock Text="{Binding Author}" Grid.Column="1"/>
+                                    <TextBlock Text="{Binding Genre}" Grid.Column="2"/>
+                                    <TextBlock Text="{Binding Pages}" Grid.Column="3"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+        
     </StackPanel>
 </UserControl>

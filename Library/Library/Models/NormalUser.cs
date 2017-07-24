@@ -46,6 +46,39 @@ namespace Library
             }
         }
 
+        public int getTetrisScore()
+        {
+            SqlConnection connection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=LibraryDB; Integrated Security=True;");
+
+            int score=0;
+            try
+            {
+                if (connection.State == ConnectionState.Closed)
+                    connection.Open();
+                
+                string query = "select * from user_tbl where Login=@Login";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@Login", Username);
+
+                SqlDataReader myReader = cmd.ExecuteReader();
+                while (myReader.Read())
+                {
+                    score = (int)myReader["TetrisScore"];
+                }
+
+                myReader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return score;
+        }
         public bool ReserveBook(int bookID)
         {
             SqlConnection connection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=LibraryDB; Integrated Security=True;");
