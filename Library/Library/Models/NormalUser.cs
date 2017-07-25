@@ -46,7 +46,7 @@ namespace Library
             }
         }
 
-        public int getTetrisScore()
+        public int getTetrisScore(string username)
         {
             SqlConnection connection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=LibraryDB; Integrated Security=True;");
 
@@ -59,7 +59,7 @@ namespace Library
                 string query = "select * from user_tbl where Login=@Login";
                 SqlCommand cmd = new SqlCommand(query, connection);
                 cmd.CommandType = CommandType.Text;
-                cmd.Parameters.AddWithValue("@Login", Username);
+                cmd.Parameters.AddWithValue("@Login", username);
 
                 SqlDataReader myReader = cmd.ExecuteReader();
                 while (myReader.Read())

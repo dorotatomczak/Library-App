@@ -35,7 +35,7 @@ namespace Library
 
         private void OpenGame(object obj)
         {
-            _navigationViewModel.SelectedViewModel = new GameViewModel();
+            _navigationViewModel.SelectedViewModel = new GameViewModel(_navigationViewModel);
         }
     }
 }

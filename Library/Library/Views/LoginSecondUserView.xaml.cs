@@ -5,9 +5,9 @@ namespace Library
     /// <summary>
     /// Interaction logic for LoginView.xaml
     /// </summary>
-	public partial class LoginView : UserControl, IHavePassword
+	public partial class LoginSecondUserView : UserControl, IHavePassword
     {
-        public LoginView()
+        public LoginSecondUserView()
         {
             InitializeComponent();
         }
@@ -21,3 +21,4 @@ namespace Library
         }
     }
 }
+

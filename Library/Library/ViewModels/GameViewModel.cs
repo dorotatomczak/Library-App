@@ -2,8 +2,6 @@
 using System.Windows.Threading;
 using System.Windows.Media;
 using System;
-using System.Reflection;
-using System.Collections.Generic;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
@@ -18,8 +16,7 @@ namespace Library
         private static int cols = 10;
         private static int rows = 20 * fluentMoveRate;
         private static int difficultyRate = rows * 10;
-        private static int timeSpan = 400;
-        bool started;
+        private static int timeSpan = 500;
         private int score;
         private int rekord;
         private int superSpeed = 100;
@@ -31,9 +28,10 @@ namespace Library
         private Block currBlock;
         private ObservableCollection<ObservableCollection<Brush>> board;
         private Brush noBrush;
+        private NavigationViewModel nvm;
         private string timer;
-        public ICommand startGameButtonCommand { get; set; }
-        #region Get&Set
+        #region Gets&Sets
+        public ICommand startGameButtonCommand { get; set; }       
         public string Timer
         {
             get { return timer; }
@@ -101,6 +99,11 @@ namespace Library
             get;
             private set;
         }
+        public ICommand BeginMultiplayerButtonCommand
+        {
+            get;
+            private set;
+        }
         public int Level
         {
             get { return level; }
@@ -116,16 +119,11 @@ namespace Library
         }
         #endregion
 
-        public GameViewModel()
+        public GameViewModel(NavigationViewModel nvm)
         {
+            this.nvm = nvm;
             userName = User.Username;
-            startGameButtonCommand = new RelayCommand(o => startGameClick("startGameButton"));
-            MoveLeftCommand = new RelayCommand(moveLeft);
-            MoveRightCommand = new RelayCommand(moveRight);
-            RotateCommand = new RelayCommand(rotate);
-            MoveFasterCommand = new RelayCommand(moveFaster);
-
-            started = false;
+            prepareButtonsAndCommands();
             board = new ObservableCollection<ObservableCollection<Brush>>();
             timer = "0";
             score = 0;
@@ -137,12 +135,10 @@ namespace Library
                 board.Add(new ObservableCollection<Brush>());
                 for (int j = 0; j < cols; j++)
                 {
-                    var newBrush = noBrush;
-                    board[i].Add(newBrush);
+                    board[i].Add(noBrush);
                 }
             }
         }
-
         private void currBlockDraw()
         {
             Point position = currBlock.getPosition();
@@ -354,8 +350,8 @@ namespace Library
                 currBlockDraw();
             }
             else
-            {
-                if (position.Y == 0)
+            {   
+                    if (position.Y == 0)
                 {
                     gameover = true;
                     return;
@@ -396,7 +392,10 @@ namespace Library
             currBlockDraw();
         }
         #endregion
-
+        private void goToMultiplayer(object param)
+        {
+            this.nvm.SelectedViewModel = new LoginSecondUserViewModel(this.nvm);
+        }
         private void DispatcherTimerSetup()
         {
             this.TimerStart = DateTime.Now;
@@ -436,11 +435,6 @@ namespace Library
 
         private void startGameClick(object sender)
         {
-            if (!started)
-            {
-                DispatcherTimerSetup();
-                started = true;
-            }
             prepareNewGame();
             for (int i = 0; i < rows; i++)
             {
@@ -463,7 +457,16 @@ namespace Library
             difficultyCounter = 1;
 
             NormalUser user = new NormalUser();
-            Rekord = user.getTetrisScore();
+            Rekord = user.getTetrisScore(User.Username);
+        }
+        private void prepareButtonsAndCommands()
+        {
+            startGameButtonCommand = new RelayCommand(o => startGameClick("startGameButton"));
+            BeginMultiplayerButtonCommand = new RelayCommand(goToMultiplayer);
+            MoveLeftCommand = new RelayCommand(moveLeft);
+            MoveRightCommand = new RelayCommand(moveRight);
+            RotateCommand = new RelayCommand(rotate);
+            MoveFasterCommand = new RelayCommand(moveFaster);
         }
         private void updateRekord()
         {

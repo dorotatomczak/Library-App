@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Library.Views
+namespace Library
 {
     /// <summary>
     /// Interaction logic for MultiplayerGameView.xaml
@@ -22,7 +22,7 @@ namespace Library.Views
     {
         public MultiplayerGameView()
         {
-            //InitializeComponent();
+            InitializeComponent();
         }
     }
 }

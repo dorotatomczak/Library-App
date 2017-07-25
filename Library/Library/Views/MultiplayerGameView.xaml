@@ -12,20 +12,36 @@
     <UserControl.InputBindings>
         <KeyBinding 
                             Key="Left" 
-                            Command="{Binding MoveLeftCommand}" 
-                            CommandParameter="{Binding moveLeft}" />
+                            Command="{Binding MoveLeftCommand1}" 
+                            CommandParameter="{Binding moveLeft1}" />
         <KeyBinding 
                             Key="Right" 
-                            Command="{Binding MoveRightCommand}" 
-                            CommandParameter="{Binding moveRight}" />
+                            Command="{Binding MoveRightCommand1}" 
+                            CommandParameter="{Binding moveRight1}" />
         <KeyBinding 
                             Key="Up" 
-                            Command="{Binding RotateCommand}" 
-                            CommandParameter="{Binding rotate}" />
+                            Command="{Binding RotateCommand1}" 
+                            CommandParameter="{Binding rotate1}" />
         <KeyBinding 
                             Key="Down" 
-                            Command="{Binding MoveFasterCommand}" 
-                            CommandParameter="{Binding moveFaster}" />
+                            Command="{Binding MoveFasterCommand1}" 
+                            CommandParameter="{Binding moveFaster1}" />
+        <KeyBinding 
+                            Key="A" 
+                            Command="{Binding MoveLeftCommand2}" 
+                            CommandParameter="{Binding moveLeft2}" />
+        <KeyBinding 
+                            Key="D" 
+                            Command="{Binding MoveRightCommand2}" 
+                            CommandParameter="{Binding moveRight2}" />
+        <KeyBinding 
+                            Key="W" 
+                            Command="{Binding RotateCommand2}" 
+                            CommandParameter="{Binding rotate2}" />
+        <KeyBinding 
+                            Key="S" 
+                            Command="{Binding MoveFasterCommand2}" 
+                            CommandParameter="{Binding moveFaster2}" />
     </UserControl.InputBindings>
     <Grid Background="{StaticResource BackgroundLightBrush}" >
         <Border
@@ -63,22 +79,24 @@
                         Command="{Binding startGameButtonCommand}" />
 
                 <!--Game area-->
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
+                    <Grid x:Name="MultiplayerGameArea2" Focusable="True" Margin="0 0 10 0">
 
-                <Grid x:Name="MultiplayerGameArea" Grid.Column="0" Grid.Row="1" Focusable="True">
-                    <StackPanel Orientation="Horizontal">
-                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <ItemsControl ItemsSource="{Binding Board1, Mode=TwoWay, 
-                        UpdateSourceTrigger=PropertyChanged}" 
-                                  ItemTemplate="{DynamicResource DataTemplate_Level1}"/>
-                        </Border>
                         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <ItemsControl ItemsSource="{Binding Board2, Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}" 
                                   ItemTemplate="{DynamicResource DataTemplate_Level1}"/>
                         </Border>
-                    </StackPanel>
-                </Grid>
+                    </Grid>
+                    <Grid x:Name="MultiplayerGameArea1" Focusable="True">
 
+                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ItemsControl ItemsSource="{Binding Board1, Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}" 
+                                  ItemTemplate="{DynamicResource DataTemplate_Level1}"/>
+                        </Border>
+                    </Grid>
+                </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="1" >
                     <Button x:Name="EndMultiplayerButton" Content="Zagraj sam"
                         VerticalAlignment="Top" Margin="0" Padding="5"
@@ -94,15 +112,16 @@
                             FontFamily="{StaticResource LatoBold}"
                             Foreground="{StaticResource BurgundyBrush}"/>
                     </StackPanel>
-                    
+
                     <!--First Player-->
+
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Player 1: "
                             FontSize="{StaticResource FontSizeRegular}"
                             FontFamily="{StaticResource LatoBold}"
                             Foreground="{StaticResource BurgundyBrush}"/>
                         <TextBlock Text="{Binding UserName1}"
-                            FontSize="{StaticResource FontSizeSmall}"
+                            FontSize="{StaticResource FontSizeRegular}"
                             FontFamily="{StaticResource LatoBold}"
                             Foreground="{StaticResource BurgundyBrush}"/>
                     </StackPanel>
@@ -128,7 +147,7 @@
                             FontFamily="{StaticResource LatoBold}"
                             Foreground="{StaticResource BurgundyBrush}"/>
                     </StackPanel>
-                    
+
                     <!--Second Player-->
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Player 2: "
@@ -136,7 +155,7 @@
                             FontFamily="{StaticResource LatoBold}"
                             Foreground="{StaticResource BurgundyBrush}"/>
                         <TextBlock Text="{Binding UserName2}"
-                            FontSize="{StaticResource FontSizeSmall}"
+                            FontSize="{StaticResource FontSizeRegular}"
                             FontFamily="{StaticResource LatoBold}"
                             Foreground="{StaticResource BurgundyBrush}"/>
                     </StackPanel>
@@ -163,12 +182,7 @@
                             Foreground="{StaticResource BurgundyBrush}"/>
                     </StackPanel>
                 </StackPanel>
-
-
             </Grid>
         </Border>
-
-        <!--Go to Register Page-->
-
     </Grid>
 </UserControl>

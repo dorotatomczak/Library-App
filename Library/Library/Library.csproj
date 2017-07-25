@@ -88,6 +88,7 @@
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\IHavePassword.cs" />
     <Compile Include="ViewModels\LibrarianMenuViewModel.cs" />
+    <Compile Include="ViewModels\LoginSecondUserViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MultiplayerGameViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
@@ -110,6 +111,9 @@
     </Compile>
     <Compile Include="Views\LibrarianMenuView.xaml.cs">
       <DependentUpon>LibrarianMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginSecondUserView.xaml.cs">
+      <DependentUpon>LoginSecondUserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -147,6 +151,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\LibrarianMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginSecondUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

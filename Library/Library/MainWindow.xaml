@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="Images/Logo/logo-small.png"
         WindowStartupLocation="CenterScreen"
-        Title="Library" Height="480" Width="640"
+        Title="Library" Height="600" Width="800"
         x:Name="This">
 
     <Window.Resources>
@@ -43,12 +43,19 @@
         <DataTemplate DataType="{x:Type local:EditBooksViewModel}">
             <local:EditBooksView/>
         </DataTemplate>
+        
         <DataTemplate DataType="{x:Type local:GameViewModel}">
             <local:GameView/>
         </DataTemplate>
-        <!--<DataTemplate DataType="{x:Type local:MultiplayerGameViewModel}">
+
+        <DataTemplate DataType="{x:Type local:MultiplayerGameViewModel}">
             <local:MultiplayerGameView/>
-        </DataTemplate>-->
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:LoginSecondUserViewModel}">
+            <local:LoginSecondUserView/>
+        </DataTemplate>
+        
         <DataTemplate x:Key="DataTemplate_Level2">
             <Label Height="3" Width="15" Background="{Binding}" BorderBrush="{Binding}" BorderThickness="1"  />
         </DataTemplate>
