@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Library"
              mc:Ignorable="d" 
              x:Name="This"
-             d:DesignHeight="300"  d:DesignWidth="350">
+             d:DesignHeight="300"  d:DesignWidth="400">
     <Grid Background="{StaticResource BackgroundLightBrush}">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <StackPanel
@@ -19,7 +19,7 @@
                     CornerRadius="10"
                     Padding="25 40 25 25"
                     Margin="0 40 0 0"
-                    Width="260"
+                    Width="350"
                     Height="auto">
 
                     <!--Login form-->

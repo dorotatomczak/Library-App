@@ -60,7 +60,7 @@ namespace Library
                 NormalUser user = new NormalUser();
                 if (user.ReserveBook(bookID))
                 {
-                    SelectedBook.Reserved = 1;
+                    SelectedBook.ReservedBy = User.Username;
                     SelectedBook.updateDatabase();
                     LoadBooks();
                 }
@@ -82,9 +82,9 @@ namespace Library
                 if (connection.State == ConnectionState.Closed)
                     connection.Open();
 
-                string query = "SELECT * FROM book_tbl WHERE Reserved=0 AND Borrowed=0";
+                string query = "SELECT * FROM book_tbl WHERE Reserved=@zero AND Borrowed=@zero";
                 SqlCommand cmd = new SqlCommand(query, connection);
-
+                cmd.Parameters.AddWithValue("@zero", "0");
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
                 da.Dispose();

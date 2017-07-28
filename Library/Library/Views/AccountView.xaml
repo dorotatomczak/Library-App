@@ -8,6 +8,7 @@
              x:Name="This"
              d:DesignHeight="600" d:DesignWidth="300">
     <StackPanel Background="{StaticResource BackgroundLightBrush}">
+
         
         <Grid>
             <Grid.ColumnDefinitions>

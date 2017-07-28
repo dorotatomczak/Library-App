@@ -17,8 +17,8 @@
         <DataGrid
             AutoGenerateColumns="False"
             x:Name="DtGrid"
-            MaxWidth="500"
-            MaxHeight="250"
+            MaxWidth="600"
+            MaxHeight="300"
             Margin="10"
             ItemsSource="{Binding Books}"
             SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
@@ -27,7 +27,9 @@
                 <DataGridTextColumn Header="Autor" Width="*" Binding="{Binding Author}"/>
                 <DataGridTextColumn Header="Gatunek" Width="*" Binding="{Binding Genre}"/>
                 <DataGridTextColumn Header="Ilość stron" Width="*" Binding="{Binding Pages}"/>
-                <DataGridTextColumn Header="Zarezerwowana" Width="*" IsReadOnly="True" Binding="{Binding Reserved}"/>
+                <DataGridTextColumn Header="Zarezerwowana" IsReadOnly="True" Width="*" Binding="{Binding ReservedBy}"/>
+                <DataGridTextColumn Header="Wypożyczona" Width="*" Binding="{Binding Borrowed}"/>
+                <DataGridTextColumn Header="Popularność" IsReadOnly="True" Width="*" Binding="{Binding AmountofBorrowings}"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -36,15 +38,22 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button
                 Grid.Column="0"
+                Command="{Binding BorrowCommand}"
+                MaxWidth="200"
+                Content="Wypożycz książkę"
+                Padding="10"/>
+            <Button
+                Grid.Column="1"
                 Command="{Binding SaveChangesCommand}"
                 MaxWidth="160"
                 Content="Zapisz zmiany"
                 Padding="10"/>
             <Button
-                Grid.Column="1"
+                Grid.Column="2"
                 CommandParameter="{Binding ElementName=This}"
                 Command="{Binding DeleteCommand}"
                 MaxWidth="150"

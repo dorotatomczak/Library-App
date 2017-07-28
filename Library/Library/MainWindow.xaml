@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="Images/Logo/logo-small.png"
         WindowStartupLocation="CenterScreen"
-        Title="Library" Height="600" Width="800"
+        Title="Library" Height="800" Width="800"
         x:Name="This">
 
     <Window.Resources>
@@ -54,6 +54,10 @@
 
         <DataTemplate DataType="{x:Type local:LoginSecondUserViewModel}">
             <local:LoginSecondUserView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:RankingViewModel}">
+            <local:RankingView/>
         </DataTemplate>
         
         <DataTemplate x:Key="DataTemplate_Level2">

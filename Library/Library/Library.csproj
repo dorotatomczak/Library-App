@@ -80,6 +80,7 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Librarian.cs" />
     <Compile Include="Models\NormalUser.cs" />
+    <Compile Include="Models\Reader.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\BaseCommand.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MultiplayerGameViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
+    <Compile Include="ViewModels\RankingViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\StartMenuViewModel.cs" />
@@ -120,6 +122,9 @@
     </Compile>
     <Compile Include="Views\MultiplayerGameView.xaml.cs">
       <DependentUpon>MultiplayerGameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RankingView.xaml.cs">
+      <DependentUpon>RankingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
@@ -167,6 +172,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MultiplayerGameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RankingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
