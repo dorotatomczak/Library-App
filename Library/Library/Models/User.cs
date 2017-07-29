@@ -8,8 +8,19 @@ namespace Library
             get;
             set;
         }
+        public static string Username2
+        {
+            get;
+            set;
+        }
 
         public static string Type
+        {
+            get;
+            set;
+        }
+
+        public static int UserID
         {
             get;
             set;

@@ -109,6 +109,7 @@ namespace Library
                             _navigationViewModel.SelectedViewModel = new EditBooksViewModel(_navigationViewModel);
                             _navigationViewModel.SelectedMenu = new LibrarianMenuViewModel(_navigationViewModel);
                         }
+                        User.UserID = (int)myReader["UserID"];
                     }
 
                     myReader.Close();

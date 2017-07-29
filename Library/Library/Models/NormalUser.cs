@@ -45,7 +45,113 @@ namespace Library
                 connection.Close();
             }
         }
+        public void getBorrowedBooks(int[] books)
+        {
+            SqlConnection connection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=LibraryDB; Integrated Security=True;");
 
+            try
+            {
+                if (connection.State == ConnectionState.Closed)
+                    connection.Open();
+
+
+                string query = "select * from user_tbl where Login=@Login";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@Login", Username);
+
+                SqlDataReader myReader = cmd.ExecuteReader();
+                while (myReader.Read())
+                {
+                    books[0] = (int)myReader["BorrowedBook1"];
+                    books[1] = (int)myReader["BorrowedBook2"];
+                    books[2] = (int)myReader["BorrowedBook3"];
+                    books[3] = (int)myReader["BorrowedBook4"];
+                    books[4] = (int)myReader["BorrowedBook5"];
+                }
+
+                myReader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public void getBorrowedBooks(int[] books,string username)
+        {
+            SqlConnection connection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=LibraryDB; Integrated Security=True;");
+
+            try
+            {
+                if (connection.State == ConnectionState.Closed)
+                    connection.Open();
+
+
+                string query = "select * from user_tbl where Login=@Login";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@Login", username);
+
+                SqlDataReader myReader = cmd.ExecuteReader();
+                while (myReader.Read())
+                {
+                    books[0] = (int)myReader["BorrowedBook1"];
+                    books[1] = (int)myReader["BorrowedBook2"];
+                    books[2] = (int)myReader["BorrowedBook3"];
+                    books[3] = (int)myReader["BorrowedBook4"];
+                    books[4] = (int)myReader["BorrowedBook5"];
+                }
+
+                myReader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public int getTetrisScore(string username)
+        {
+            SqlConnection connection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=LibraryDB; Integrated Security=True;");
+
+            int score=0;
+            try
+            {
+                if (connection.State == ConnectionState.Closed)
+                    connection.Open();
+                
+                string query = "select * from user_tbl where Login=@Login";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@Login", username);
+
+                SqlDataReader myReader = cmd.ExecuteReader();
+                while (myReader.Read())
+                {
+                    score = (int)myReader["TetrisScore"];
+                }
+
+                myReader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return score;
+        }
         public bool ReserveBook(int bookID)
         {
             SqlConnection connection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=LibraryDB; Integrated Security=True;");
@@ -94,6 +200,14 @@ namespace Library
                 cmd.Parameters.AddWithValue("@BookID", bookID);
                 cmd.Parameters.AddWithValue("@Login", Username);
                 cmd.ExecuteNonQuery();
+
+                query = "UPDATE book_tbl SET Reserved=@UserID where BookID=@bookID";
+                cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@bookID", bookID);
+                cmd.Parameters.AddWithValue("@UserID", User.UserID);
+                cmd.ExecuteNonQuery();
+
+
                 MessageBox.Show("Rezerwacja przebiegła pomyślnie. Jeśli w ciągu 3 dni nie wypożyczysz książki, rezerwacja zostanie cofnięta.");
                 success = true;
             }

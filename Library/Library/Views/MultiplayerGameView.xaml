@@ -1,0 +1,188 @@
+﻿<UserControl x:Class="Library.MultiplayerGameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Library"
+             mc:Ignorable="d" 
+             x:Name="This"
+             d:DesignHeight="350"  d:DesignWidth="600"
+             Focusable="True"
+             >
+    <UserControl.InputBindings>
+        <KeyBinding 
+                            Key="Left" 
+                            Command="{Binding MoveLeftCommand1}" 
+                            CommandParameter="{Binding moveLeft1}" />
+        <KeyBinding 
+                            Key="Right" 
+                            Command="{Binding MoveRightCommand1}" 
+                            CommandParameter="{Binding moveRight1}" />
+        <KeyBinding 
+                            Key="Up" 
+                            Command="{Binding RotateCommand1}" 
+                            CommandParameter="{Binding rotate1}" />
+        <KeyBinding 
+                            Key="Down" 
+                            Command="{Binding MoveFasterCommand1}" 
+                            CommandParameter="{Binding moveFaster1}" />
+        <KeyBinding 
+                            Key="A" 
+                            Command="{Binding MoveLeftCommand2}" 
+                            CommandParameter="{Binding moveLeft2}" />
+        <KeyBinding 
+                            Key="D" 
+                            Command="{Binding MoveRightCommand2}" 
+                            CommandParameter="{Binding moveRight2}" />
+        <KeyBinding 
+                            Key="W" 
+                            Command="{Binding RotateCommand2}" 
+                            CommandParameter="{Binding rotate2}" />
+        <KeyBinding 
+                            Key="S" 
+                            Command="{Binding MoveFasterCommand2}" 
+                            CommandParameter="{Binding moveFaster2}" />
+    </UserControl.InputBindings>
+    <Grid Background="{StaticResource BackgroundLightBrush}" >
+        <Border
+                    Background="White"
+                    CornerRadius="10"
+                    Padding="5 5 5 5"
+                    Margin="0 20 0 0"
+                    Width="600"
+                    Height="auto">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="4*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="9*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Poziom: "
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    <TextBlock Text="{Binding Level}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                </StackPanel>
+
+                <Button x:Name="MultiplayerStartGameButton" Grid.Column="1" Content="Rozpocznij grę"
+                        VerticalAlignment="Top" Margin="0" Padding="5"
+                        FontSize="{StaticResource FontSizeSmall}"
+                        Command="{Binding startGameButtonCommand}" />
+
+                <!--Game area-->
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
+                    <Grid x:Name="MultiplayerGameArea2" Focusable="True" Margin="0 0 10 0">
+
+                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ItemsControl ItemsSource="{Binding Board2, Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}" 
+                                  ItemTemplate="{DynamicResource DataTemplate_Level1}"/>
+                        </Border>
+                    </Grid>
+                    <Grid x:Name="MultiplayerGameArea1" Focusable="True">
+
+                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ItemsControl ItemsSource="{Binding Board1, Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}" 
+                                  ItemTemplate="{DynamicResource DataTemplate_Level1}"/>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="1" >
+                    <Button x:Name="EndMultiplayerButton" Content="Zagraj sam"
+                        VerticalAlignment="Top" Margin="0" Padding="5"
+                        FontSize="{StaticResource FontSizeSmall}"
+                        Command="{Binding EndMultiplayerButtonCommand}" />
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Czas: "
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                        <TextBlock Text="{Binding Timer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    </StackPanel>
+
+                    <!--First Player-->
+
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Player 1: "
+                            FontSize="{StaticResource FontSizeRegular}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                        <TextBlock Text="{Binding UserName1}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Wynik: "
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                        <TextBlock Text="{Binding Score1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Rekord: "
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                        <TextBlock Text="{Binding Rekord1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    </StackPanel>
+
+                    <!--Second Player-->
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Player 2: "
+                            FontSize="{StaticResource FontSizeRegular}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                        <TextBlock Text="{Binding UserName2}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Wynik: "
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                        <TextBlock Text="{Binding Score2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Rekord: "
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                        <TextBlock Text="{Binding Rekord2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

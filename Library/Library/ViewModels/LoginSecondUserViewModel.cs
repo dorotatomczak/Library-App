@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,14 +12,16 @@ using System.Windows.Input;
 
 namespace Library
 {
-    class RegisterViewModel : ViewModelBase
+    public class LoginSecondUserViewModel : ViewModelBase
     {
         private string _PasswordInVM;
         private string _username;
-        private string _email;
 
-        public RegisterViewModel()
+        private NavigationViewModel _navigationViewModel;
+
+        public LoginSecondUserViewModel(NavigationViewModel nvm)
         {
+            _navigationViewModel = nvm;
             SubmitCommand = new RelayCommand(Submit);
         }
 
@@ -38,16 +41,6 @@ namespace Library
             }
         }
 
-        public string Email
-        {
-            get { return _email; }
-            set
-            {
-                _email = value;
-                OnPropertyChanged("Email");
-            }
-        }
-
         public string PasswordInVM
         {
             get
@@ -62,7 +55,7 @@ namespace Library
         }
 
         /// <summary>
-        /// Submiting a new account
+        /// Signing in to the account
         /// </summary>
         /// <param name="parameter"></param>
         private void Submit(object parameter)
@@ -82,34 +75,26 @@ namespace Library
                 if (connection.State == ConnectionState.Closed)
                     connection.Open();
 
-                String query = "SELECT COUNT(1) FROM user_tbl WHERE Login=@Login";
+                String query = "SELECT COUNT(1) FROM user_tbl WHERE Login=@Login AND Password=@Password";
 
                 SqlCommand cmd = new SqlCommand(query, connection);
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("@Login", UserName);
+                cmd.Parameters.AddWithValue("@Password", PasswordInVM);
 
                 int count = Convert.ToInt32(cmd.ExecuteScalar());
 
                 if (count == 1)
                 {
-                    MessageBox.Show("This login is already taken.");
+                    User.Username2 = UserName;
+
+                    _navigationViewModel.SelectedViewModel = new MultiplayerGameViewModel(_navigationViewModel);
+
                 }
                 else
                 {
-                    query = "insert into user_tbl (Login, Email, Password, TetrisScore, ReservedBook1, ReservedBook2, ReservedBook3, "+
-                        "BorrowedBook1, BorrowedBook2, BorrowedBook3, BorrowedBook4, BorrowedBook5, Type, ReadBooksAmount, BorrowedBooksIDs, MostPopularGenre) values(@Login, @Email, @Password, "+
-                        "0, 0, 0, 0, 0, 0, 0, 0, 0, 'Normal', 0, 'none', 'none')";
-
-                    cmd = new SqlCommand(query, connection);
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Login", this.UserName);
-                    cmd.Parameters.AddWithValue("@Email", this.Email);
-                    cmd.Parameters.AddWithValue("@Password", this.PasswordInVM);
-
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Rejestracja przebiegła pomyślnie. Możesz się zalogować.");
+                    MessageBox.Show("Login lub hasło są nieprawidłowe");
                 }
-
             }
             catch (Exception ex)
             {

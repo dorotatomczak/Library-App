@@ -16,8 +16,9 @@ namespace Library
         private string _author;
         private int _pages;
         private string _genre;
-        private int _borrowed;
-        private int _reserved;
+        private string _borrowed;
+        private string _reserved;
+        private int _amountOfBorrowings;
 
         public Book()
         {
@@ -25,8 +26,9 @@ namespace Library
             Author = "nn";
             Genre = "nn";
             Pages = 0;
-            Reserved = 0;
-            Borrowed = 0;
+            ReservedBy = "0";
+            Borrowed = "0";
+            AmountofBorrowings = 0;
         }
 
         #region Gets & Sets
@@ -61,16 +63,22 @@ namespace Library
             set { _genre = value; }
         }
 
-        public int Borrowed
+        public string Borrowed
         {
             get { return _borrowed; }
             set { _borrowed = value; }
         }
 
-        public int Reserved
+        public string ReservedBy
         {
             get { return _reserved; }
             set { _reserved = value; }
+        }
+
+        public int AmountofBorrowings
+        {
+            get { return _amountOfBorrowings; }
+            set { _amountOfBorrowings = value; }
         }
 
         #endregion
@@ -85,7 +93,7 @@ namespace Library
                     connection.Open();
 
                 //check if user can reserve another book
-                string query = query = "UPDATE book_tbl SET Title = @Title, Author = @Author, Pages = @Pages," + 
+                string query = query = "UPDATE book_tbl SET Title = @Title, Author = @Author, Pages = @Pages," +
                     " Genre = @Genre, Reserved = @Reserved, Borrowed = @Borrowed WHERE BookID=@BookID";
                 SqlCommand cmd = new SqlCommand(query, connection);
 
@@ -94,7 +102,7 @@ namespace Library
                 cmd.Parameters.AddWithValue("@Author", this.Author);
                 cmd.Parameters.AddWithValue("@Pages", this.Pages);
                 cmd.Parameters.AddWithValue("@Genre", this.Genre);
-                cmd.Parameters.AddWithValue("@Reserved", this.Reserved);
+                cmd.Parameters.AddWithValue("@Reserved", this.ReservedBy);
                 cmd.Parameters.AddWithValue("@Borrowed", this.Borrowed);
                 cmd.ExecuteNonQuery();
             }

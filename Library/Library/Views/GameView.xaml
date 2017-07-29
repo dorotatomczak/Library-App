@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="Library.GameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Library"
+             mc:Ignorable="d" 
+             x:Name="This"
+             d:DesignHeight="350"  d:DesignWidth="600"
+             Focusable="True"
+             >
+    <UserControl.InputBindings>
+        <KeyBinding 
+                            Key="Left" 
+                            Command="{Binding MoveLeftCommand}" 
+                            CommandParameter="{Binding moveLeft}" />
+        <KeyBinding 
+                            Key="Right" 
+                            Command="{Binding MoveRightCommand}" 
+                            CommandParameter="{Binding moveRight}" />
+        <KeyBinding 
+                            Key="Up" 
+                            Command="{Binding RotateCommand}" 
+                            CommandParameter="{Binding rotate}" />
+        <KeyBinding 
+                            Key="Down" 
+                            Command="{Binding MoveFasterCommand}" 
+                            CommandParameter="{Binding moveFaster}" />
+    </UserControl.InputBindings>
+    <Grid Background="{StaticResource BackgroundLightBrush}" >
+        <Border
+                    Background="White"
+                    CornerRadius="10"
+                    Padding="5 5 5 5"
+                    Margin="0 20 0 0"
+                    Width="600"
+                    Height="auto">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="4*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="9*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Poziom: "
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    <TextBlock x:Name="Level" Text="{Binding Level}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                </StackPanel>
+
+                <Button x:Name="startGameButton" Grid.Column="1" Content="Rozpocznij grę"
+                        VerticalAlignment="Top" Margin="0" Padding="5"
+                        FontSize="{StaticResource FontSizeSmall}"
+                        Command="{Binding startGameButtonCommand}" />
+
+                <!--Game area-->
+
+                <Grid x:Name="gameArea" Grid.Column="0" Grid.Row="1" Focusable="True">
+                   
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ItemsControl ItemsSource="{Binding Board, Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}" 
+                                  ItemTemplate="{DynamicResource DataTemplate_Level1}"/>
+                    </Border>
+                </Grid>
+
+                <StackPanel Grid.Column="1" Grid.Row="1" >
+                    <Button x:Name="BeginMultiplayerButton" Content="Zagraj z przyjacielem"
+                        VerticalAlignment="Top" Margin="0" Padding="5"
+                        FontSize="{StaticResource FontSizeSmall}"
+                        Command="{Binding BeginMultiplayerButtonCommand}" />
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Czas: "
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                        <TextBlock Text="{Binding Timer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Wynik: "
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                        <TextBlock Text="{Binding Score, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Rekord: "
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                        <TextBlock Text="{Binding Rekord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            FontFamily="{StaticResource LatoBold}"
+                            Foreground="{StaticResource BurgundyBrush}"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+
+            </Grid>
+        </Border>
+
+        <!--Go to Register Page-->
+
+    </Grid>
+</UserControl>

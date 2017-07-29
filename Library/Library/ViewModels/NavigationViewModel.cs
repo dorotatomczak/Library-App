@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class NavigationViewModel : INotifyPropertyChanged
+    public class NavigationViewModel : INotifyPropertyChanged
     {
         protected object selectedMenu;
         protected object selectedViewModel;
