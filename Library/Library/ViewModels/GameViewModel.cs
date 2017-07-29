@@ -24,14 +24,14 @@ namespace Library
         private int difficultyCounter;
         private bool gameover;
         private int level { get; set; }
-        private DispatcherTimer dispatcherTimer { get; set; }
+        public DispatcherTimer dispatcherTimer { get; set; }
         private Block currBlock;
         private ObservableCollection<ObservableCollection<Brush>> board;
         private Brush noBrush;
         private NavigationViewModel nvm;
         private string timer;
         #region Gets&Sets
-        public ICommand startGameButtonCommand { get; set; }       
+        public ICommand startGameButtonCommand { get; set; }
         public string Timer
         {
             get { return timer; }
@@ -155,7 +155,8 @@ namespace Library
                     {
                         for (int a = 0; a < fluentMoveRate; a++)
                         {
-                            if ((int)(position.Y) + i * fluentMoveRate + a >= rows || (int)(position.X) + j >= cols) break;
+                            if ((int)(position.Y) + i * fluentMoveRate + a >= rows || (int)(position.X) + j >= cols
+                                || (int)(position.Y) + i * fluentMoveRate + a < 0 || (int)(position.X) + j < 0) break;
                             if (board[(int)(position.Y) + i * fluentMoveRate + a][(int)(position.X) + j] != noBrush)
                             {
                                 canBeDrawn = false;
@@ -350,8 +351,8 @@ namespace Library
                 currBlockDraw();
             }
             else
-            {   
-                    if (position.Y == 0)
+            {
+                if (position.Y == 0)
                 {
                     gameover = true;
                     return;
@@ -407,7 +408,7 @@ namespace Library
 
         private DateTime TimerStart { get; set; }
 
-        private void TimeTick(object sender, EventArgs e)
+        public void TimeTick(object sender, EventArgs e)
         {
             if (gameover)
             {
@@ -423,6 +424,166 @@ namespace Library
                 difficultyLevel *= 1.1;
                 difficultyCounter = 1;
                 Level++;
+
+                #region get book proposition
+                SqlConnection connection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=LibraryDB; Integrated Security=True;");
+                try
+                {
+                    if (connection.State == ConnectionState.Closed)
+                        connection.Open();
+
+                    string query = "select * from user_tbl where Login=@Login";
+                    var cmd = new SqlCommand(query, connection);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Login", User.Username);
+
+                    SqlDataReader myReader = cmd.ExecuteReader();
+                    string[] prevIDs = new string[2];
+                    string title="", genre="";
+
+                    while (myReader.Read())
+                    {
+                        if ((string)myReader["BorrowedBooksIDs"] != "none")
+                        {
+                            prevIDs = ((string)myReader["BorrowedBooksIDs"]).Split(',');
+                        }
+                        else
+                        {
+                            prevIDs = new string[2];
+                            prevIDs[0] = "0";
+                            prevIDs[1] = "0";
+                        }
+                    }
+                    myReader.Close();
+
+                    if (prevIDs[0] == "0" && prevIDs[1] == "0")
+                    {
+                        query = "select * from book_tbl";
+                        cmd = new SqlCommand(query, connection);
+                        cmd.CommandType = CommandType.Text;
+
+                        myReader = cmd.ExecuteReader();
+                        while (myReader.Read())
+                        {
+                            title = (string)myReader["Title"];
+                            genre = (string)myReader["Genre"];
+                            break;
+                        }
+                        myReader.Close();
+                    }
+                    else if (prevIDs[0] == "0")
+                    {
+                        query = "select * from book_tbl where BookID=@bookID";
+                        cmd = new SqlCommand(query, connection);
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@bookID", Int32.Parse(prevIDs[1]));
+
+                        myReader = cmd.ExecuteReader();
+                        while (myReader.Read())
+                        {
+                            title = (string)myReader["Title"];
+                            genre = (string)myReader["Genre"];
+                            break;
+                        }
+                        myReader.Close();
+
+                        query = "select * from book_tbl where Genre=@genre";
+                        cmd = new SqlCommand(query, connection);
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@genre", genre);
+
+                        myReader = cmd.ExecuteReader();
+
+                        while (myReader.Read())
+                        {
+                            if ((int)myReader["BookID"] == Int32.Parse(prevIDs[1])) continue;
+                            title = (string)myReader["Title"];
+                            break;
+                        }
+                        myReader.Close();
+
+                    }
+
+                    else
+                    {
+                        string  genre1="";
+                        string  genre2="";
+
+                        query = "select * from book_tbl where BookID=@bookID";
+                        cmd = new SqlCommand(query, connection);
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@bookID", Int32.Parse(prevIDs[0]));
+
+                        myReader = cmd.ExecuteReader();
+                        while (myReader.Read())
+                        {
+                            genre1 = (string)myReader["Genre"];
+                            break;
+                        }
+                        myReader.Close();
+
+                        query = "select * from book_tbl where BookID=@bookID";
+                        cmd = new SqlCommand(query, connection);
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@bookID", Int32.Parse(prevIDs[1]));
+
+                        myReader = cmd.ExecuteReader();
+                        while (myReader.Read())
+                        {
+                            genre2 = (string)myReader["Genre"];
+                            break;
+                        }
+                        myReader.Close();
+
+                        if(genre1 == genre2)
+                        {
+                            genre = genre1;
+                        }
+                        else
+                        {
+                            Random rand = new Random();
+                            if ((rand.Next()) % 2 ==0)
+                            {
+                                genre = genre1;
+                            }
+                            else
+                            {
+                                genre = genre2;
+                            }
+                        }
+                        query = "select * from book_tbl where Genre=@genre";
+                        cmd = new SqlCommand(query, connection);
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@genre", genre);
+
+                        myReader = cmd.ExecuteReader();
+
+                        while (myReader.Read())
+                        {
+                            if ((int)myReader["BookID"] == Int32.Parse(prevIDs[0]) || (int)myReader["BookID"] == Int32.Parse(prevIDs[1])) continue;
+                            title = (string)myReader["Title"];
+                            break;
+                        }
+                        myReader.Close();
+                    }
+
+                    query = "UPDATE user_tbl SET MostPopularGenre = @genre WHERE Login=@Login";
+                    cmd = new SqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@genre", genre);
+                    cmd.Parameters.AddWithValue("@Login", User.Username);
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show(string.Format("Czy czytałeś już książkę: {0}?", title));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                #endregion
             }
             difficultyCounter++;
             timer = currentValue.TotalSeconds.ToString("000");

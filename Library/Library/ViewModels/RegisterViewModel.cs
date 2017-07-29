@@ -96,7 +96,9 @@ namespace Library
                 }
                 else
                 {
-                    query = "insert into user_tbl (Login, Email, Password, TetrisScore, ReservedBook1, ReservedBook2, ReservedBook3, BorrowedBook1, BorrowedBook2, BorrowedBook3, BorrowedBook4, BorrowedBook5, Type, ReadBooksAmount, BorrowedBooksIDs, MostPopularGenre) values(@Login, @Email, @Password, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Normal', 0, 'none', 'none')";
+                    query = "insert into user_tbl (Login, Email, Password, TetrisScore, ReservedBook1, ReservedBook2, ReservedBook3, "+
+                        "BorrowedBook1, BorrowedBook2, BorrowedBook3, BorrowedBook4, BorrowedBook5, Type, ReadBooksAmount, BorrowedBooksIDs, MostPopularGenre) values(@Login, @Email, @Password, "+
+                        "0, 0, 0, 0, 0, 0, 0, 0, 0, 'Normal', 0, 'none', 'none')";
 
                     cmd = new SqlCommand(query, connection);
                     cmd.CommandType = CommandType.Text;

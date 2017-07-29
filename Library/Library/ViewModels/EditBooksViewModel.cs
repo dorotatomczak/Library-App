@@ -381,10 +381,11 @@ namespace Library
                             #endregion
 
                             #region borrow the book
-                            int TotalBorrowedBooks = 0;
-                            string bookIDs = string.Empty;
                             if (success)
                             {
+                                int TotalBorrowedBooks = 0;
+                                string bookIDs = string.Empty;
+
                                 cmd1 = new SqlCommand(query1, connection);
                                 cmd1.Parameters.AddWithValue("@Login", SelectedBook.ReservedBy);
                                 cmd1.Parameters.AddWithValue("@SelectedBookID", SelectedBook.BookID);
@@ -402,9 +403,20 @@ namespace Library
                                     TotalBorrowedBooks = (int)myReader2["ReadBooksAmount"];
                                     TotalBorrowedBooks++;
 
+                                    string[] prevIDs;
+                                    if ((string)myReader2["BorrowedBooksIDs"] != "none")
+                                    {
+                                        prevIDs = ((string)myReader2["BorrowedBooksIDs"]).Split(',');
+                                    }
+                                    else
+                                    {
+                                        prevIDs = new string[2];
+                                        prevIDs[1] = "0";
+                                    }
                                     bookIDs = (string)myReader2["BorrowedBooksIDs"];
-                                    bookIDs = string.Concat(bookIDs, ",");
-                                    bookIDs = string.Concat(bookIDs, SelectedBook.BookID.ToString());
+                                    bookIDs = string.Concat(prevIDs[1]);
+                                    bookIDs = string.Concat(bookIDs,',');
+                                    bookIDs = string.Concat(bookIDs,SelectedBook.BookID.ToString());
 
                                     if ((int)myReader2["ReservedBook1"] == SelectedBook.BookID)
                                     {
@@ -449,7 +461,7 @@ namespace Library
                                 MessageBox.Show("Książka została wypożyczona");
                                 #endregion
 
-                            #region increase borrowing amount in book tbl
+                                #region increase borrowing amount in book tbl
                                 query1 = "select * from book_tbl where BookID=@BookID";
                                 cmd1 = new SqlCommand(query1, connection);
                                 cmd1.CommandType = CommandType.Text;
@@ -463,7 +475,7 @@ namespace Library
                                     break;
                                 }
                                 myReader2.Close();
-                                borrowingsAmount+=1;
+                                borrowingsAmount += 1;
                                 SelectedBook.AmountofBorrowings = borrowingsAmount;
 
                                 query1 = "UPDATE book_tbl SET AmountofBorrowings=@AmountofBorrowings WHERE BookID=@BookID";

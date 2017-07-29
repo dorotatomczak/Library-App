@@ -27,21 +27,45 @@ namespace Library
 
         private void OpenAccount(object obj)
         {
+
+            if (_navigationViewModel.SelectedViewModel.GetType() == typeof(GameViewModel))
+            {
+                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
+                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+            }
             _navigationViewModel.SelectedViewModel = new AccountViewModel(_navigationViewModel);
         }
 
         private void OpenBooks(object obj)
         {
+            if (_navigationViewModel.SelectedViewModel.GetType() == typeof(GameViewModel))
+            {
+                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
+                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+            }
+               
             _navigationViewModel.SelectedViewModel = new BooksViewModel();
         }
 
         private void OpenGame(object obj)
         {
+
+            if (_navigationViewModel.SelectedViewModel.GetType() == typeof(GameViewModel))
+            {
+                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
+                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+            }
             _navigationViewModel.SelectedViewModel = new GameViewModel(_navigationViewModel);
         }
 
         private void OpenRanking(object obj)
         {
+
+            if (_navigationViewModel.SelectedViewModel.GetType() == typeof(GameViewModel))
+            {
+                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
+                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+            }
             _navigationViewModel.SelectedViewModel = new RankingViewModel();
         }
     }
