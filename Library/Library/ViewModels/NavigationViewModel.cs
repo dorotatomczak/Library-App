@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Library
 {
     public class NavigationViewModel : INotifyPropertyChanged
     {
+        public ICommand LoginCommand { get; set; }
+        public ICommand RegisterCommand { get; set; }
         protected object selectedMenu;
         protected object selectedViewModel;
         public static NavigationViewModel Instance { get; private set; }
@@ -18,7 +17,20 @@ namespace Library
             selectedViewModel = new LoginViewModel(this);
             selectedMenu = new StartMenuViewModel(this);
 
+            LoginCommand = new BaseCommand(OpenLogin);
+            RegisterCommand = new BaseCommand(OpenRegister);
+
             Instance = this;
+        }
+
+        private void OpenLogin(object obj)
+        {
+            SelectedViewModel = new LoginViewModel(this);
+        }
+
+        private void OpenRegister(object obj)
+        {
+            SelectedViewModel = new RegisterViewModel();
         }
 
         public object SelectedViewModel
