@@ -16,7 +16,7 @@ namespace Library
 
         private NavigationViewModel _navigationViewModel;
 
-        public UserMenuViewModel (NavigationViewModel nvm)
+        public UserMenuViewModel(NavigationViewModel nvm)
         {
             _navigationViewModel = nvm;
             ShowAccountCommand = new BaseCommand(OpenAccount);
@@ -30,8 +30,11 @@ namespace Library
 
             if (_navigationViewModel.SelectedViewModel.GetType() == typeof(GameViewModel))
             {
-                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
-                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+                if (((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer != null)
+                {
+                    ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
+                    ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+                }
             }
             _navigationViewModel.SelectedViewModel = new AccountViewModel(_navigationViewModel);
         }
@@ -40,10 +43,13 @@ namespace Library
         {
             if (_navigationViewModel.SelectedViewModel.GetType() == typeof(GameViewModel))
             {
-                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
-                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+                if (((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer != null)
+                {
+                    ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
+                    ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+                }
             }
-               
+
             _navigationViewModel.SelectedViewModel = new BooksViewModel();
         }
 
@@ -52,8 +58,11 @@ namespace Library
 
             if (_navigationViewModel.SelectedViewModel.GetType() == typeof(GameViewModel))
             {
-                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
-                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+                if (((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer != null)
+                {
+                    ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
+                    ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+                }
             }
             _navigationViewModel.SelectedViewModel = new GameViewModel(_navigationViewModel);
         }
@@ -63,8 +72,11 @@ namespace Library
 
             if (_navigationViewModel.SelectedViewModel.GetType() == typeof(GameViewModel))
             {
-                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
-                ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+                if (((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer != null)
+                {
+                    ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Stop();
+                    ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
+                }
             }
             _navigationViewModel.SelectedViewModel = new RankingViewModel();
         }

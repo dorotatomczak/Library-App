@@ -17,12 +17,6 @@ namespace Library
         public bool canMove;
         private Point currPosition;
         private Brush noBrush = Brushes.LightGray;
-        public Block(Brush color)
-        {
-            this.color = color;
-        }
-
-
         public Block()
         {
             Random rand = new Random();
