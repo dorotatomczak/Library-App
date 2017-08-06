@@ -8,13 +8,12 @@
              x:Name="This"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="{StaticResource BackgroundLightBrush}">
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,-10,0,10">
-            <StackPanel
+        <StackPanel
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 TextBlock.TextAlignment="Center">
 
-                <Border
+            <Border
                     Background="White"
                     CornerRadius="10"
                     Padding="25 40 25 25"
@@ -23,42 +22,42 @@
                     Height="auto">
 
 
-                    <!--Register form-->
-                    <StackPanel>
-                        <TextBlock
+                <!--Register form-->
+                <StackPanel>
+                    <TextBlock
                             Text="Rejestracja"
                             FontSize="{StaticResource FontSizeLarge}"
                             FontFamily="{StaticResource LatoBold}"
                             Foreground="{StaticResource BurgundyBrush}"/>
 
-                        <Label 
+                    <Label 
                             Content="Login"
                             FontFamily="{StaticResource LatoRegular}"
                             FontSize="{StaticResource FontSizeSmall}"
                             Margin="0 10 0 0"/>
-                        <TextBox
+                    <TextBox
                             x:Name="Login"
                             Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Padding="2"/>
 
-                        <Label 
+                    <Label 
                             Content="E-mail"
                             FontFamily="{StaticResource LatoRegular}"
                             FontSize="{StaticResource FontSizeSmall}"
                             Margin="0 10 0 0"/>
-                        <TextBox
+                    <TextBox
                             x:Name="Email"
                             Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Padding="2"/>
 
-                        <Label 
+                    <Label 
                             Content="Hasło"
                             FontFamily="{StaticResource LatoRegular}"
                             FontSize="{StaticResource FontSizeSmall}"
                             Margin="0 10 0 0"/>
-                        <PasswordBox x:Name="txtPassword" Padding="2"/>
+                    <PasswordBox x:Name="txtPassword" Padding="2"/>
 
-                        <Button
+                    <Button
                             x:Name="Submit"
                             CommandParameter="{Binding ElementName=This}"
                             Command="{Binding SubmitCommand}"
@@ -66,17 +65,16 @@
                             HorizontalAlignment="Center"
                             Margin="0 20 0 0"/>
 
-                    </StackPanel>
-                </Border>
+                </StackPanel>
+            </Border>
 
-                <Button
+            <Button
                     Command="{Binding DataContext.LoginCommand, 
                         RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"
                     Style="{StaticResource TextButton}"
                     Content="Posiadasz już konto? Zaloguj się."
                     HorizontalAlignment="Center" />
 
-            </StackPanel>
-        </ScrollViewer>
+        </StackPanel>
     </Grid>
 </UserControl>

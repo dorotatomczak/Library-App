@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Icon="Images/Logo/logo-small.png"
         WindowStartupLocation="CenterScreen"
-        Title="Library" Height="720" Width="800"
+        Title="Library" Height="480" Width="700"
+        MinWidth="700"
         x:Name="This">
 
     <Window.Resources>
@@ -78,10 +79,17 @@
     <DockPanel LastChildFill="True">
 
         <!--Navigation menu on the top-->
-        <ContentControl x:Name="Menu" DockPanel.Dock="Top"  Content="{Binding SelectedMenu}"/>
+        <ContentControl
+            x:Name="Menu"
+            DockPanel.Dock="Top"
+            Content="{Binding SelectedMenu}"/>
         
         <!--Application content-->
-        <ContentControl x:Name="Pages" DockPanel.Dock="Bottom"  Content="{Binding SelectedViewModel}"/>
+        <ScrollViewer
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Auto">
+            <ContentControl x:Name="Pages" DockPanel.Dock="Bottom" Content="{Binding SelectedViewModel}"/>
+        </ScrollViewer>
 
     </DockPanel>
 

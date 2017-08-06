@@ -27,7 +27,6 @@ namespace Library
 
         private void OpenAccount(object obj)
         {
-
             if (_navigationViewModel.SelectedViewModel.GetType() == typeof(GameViewModel))
             {
                 if (((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer != null)

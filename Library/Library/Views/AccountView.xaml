@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Library"
              mc:Ignorable="d"
              x:Name="This"
-             d:DesignHeight="600" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel Background="{StaticResource BackgroundLightBrush}">
 
         
@@ -33,26 +33,23 @@
                     Foreground="{StaticResource BurgundyBrush}"/>
 
                 <TextBlock
+                    HorizontalAlignment="Left"
+                    MaxWidth="300"
                     Margin="0 5 5 0"
                     TextWrapping="Wrap"
                     Text="Biblioteka online to aplikacja, która umożliwi Ci rezerwowanie wybranych książek, abyś był pewien, że nikt inny nie ubiegnie Cię w wypożyczeniu danej pozycji."
                     FontFamily="{StaticResource LatoRegular}"
                     FontSize="{StaticResource FontSizeSmall}"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="1.5*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Button
-                        Grid.Column="0"
-                        CommandParameter="{Binding ElementName=This}"
-                        Command="{Binding LogOutCommand}"
-                        MaxWidth="100"
-                        Content="Wyloguj"
-                        Padding="10"/>
-                </Grid>
+                <Button
+                    HorizontalAlignment="Left"
+                    Margin="0 30 0 0"
+                    Grid.Column="0"
+                    CommandParameter="{Binding ElementName=This}"
+                    Command="{Binding LogOutCommand}"
+                    MaxWidth="100"
+                    Content="Wyloguj"
+                    Padding="10"/>
 
             </StackPanel>
         </Grid>
