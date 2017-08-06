@@ -1,0 +1,32 @@
+Aplikacja biblioteczna
+
+Filmik: https://youtu.be/nthWSXe6ibs 
+Wykorzystana technologia: WPF
+
+Rejestracja
+RegisterView zawiera prosty formularz umo¿liwiaj¹cy rejestracjê, po klikniêciu przycisku z napisem „Zarejestruj siê” (Command="{Binding SubmitCommand}"). Zostaje wtedy uruchomiona odpowiednia komenda, która realizuje funkcjê o nazwie Submit (SubmitCommand = new RelayCommand(Submit)). Po przechwyceniu has³a i shashowaniu go, zostaje nawi¹zana próba po³¹czenia w bloku try catch z baz¹ SQL (String query = "SELECT COUNT(1) FROM user_tbl WHERE Login=@Login"). Nastêpnie zostaje utworzona komenda, która sprawdza, czy u¿ytkownik o podanym loginie ju¿ istnieje. Po zrzutowaniu na inta, jeœli wynik komendy wynosi jeden, login jest ju¿ zajêty. W przeciwnym wypadku zostaje utworzona kolejna komenda, która dodaje nowego u¿ytkownika do bazy danych. Niezale¿nie od wyniku po³¹czenia z baz¹ danych po³¹czenie zostaje zamkniête (connection.Close()), dziêki finally i na tej samej zasadzie dzia³aj¹ wszystkie pozosta³e po³¹czenia z baz¹ realizowane podczas dzia³ania aplikacji.
+
+Logowanie
+Próba logowania nastêpuje po naciœniêciu przycisku z napisem „Zaloguj siê” w LoginView. Powi¹zanie przycisku z odpowiedni¹ funkcj¹ w LoginViewModel jest analogiczne do przypadku z rejestracj¹. W funkcji Submit po shashowaniu has³a i nawi¹zaniu po³¹czenia, zostaje utworzona komenda, która sprawdza, czy istnieje u¿ytkownik o podanym loginie i haœle. Jeœli tak, do statycznego pola UserName nale¿¹cego do klasy User, zostaje przypisany podany login, który bêdzie dostêpny do momentu wylogowania lub zamkniêcia aplikacji, aby umo¿liwiæ identyfikacjê zalogowanego u¿ytkownika. Zostaje równie¿ sprawdzony typ u¿ytkownika (normalny lub bibliotekarz) i na tej podstawie do SelectedViewModel i SelectedMenu zostaj¹ przypisane odpowiedni widoki (np. _navigationViewModel.SelectedViewModel = new AccountViewModel(_navigationViewModel)).
+
+Konto u¿ytkownika
+	Wylogowanie polega na przypisaniu do statycznych User.Username i User.Type pustych stringów i zmianie SelectedViewModel i SelectedMenu na stronê logowania.
+	Anulowanie rezerwacji polega wywo³aniu metody z klasy User user.CancelReservation(bookID), zaktualizowanie informacji o tym, ¿e ksi¹¿ka nie jest ju¿ zarezerwowana, a nastêpnie zaktualizowanie bazy danych (SelectedBook.updateDatabase()) i wywo³anie metody LoadBooks(), która pobiera odpowiednie ksi¹¿ki, maj¹ce siê wyœwietlaæ w tabeli. Metody CancelReservation i updateDatabase maj¹ podobny schemat. Po po³¹czeniu z baz¹, tworzona jest komenda z odpowiednimi parametrami i nastêpnie jest ona realizowana.
+	Rezerwacja przebiega niemal identycznie z tym, ¿e zostaje wywo³ana metoda ReserveBook, a nie CancelReservation.
+
+Konto bibliotekarza
+	Ksi¹¿ki wyœwietlane s¹ dziêki zastosowaniu DataGrid w EditBooksView. Zastosowa³am w tym przypadku DataGrid poniewa¿ pozwala to na edycjê tabeli poprzez zmienianie istniej¹cych lub dodawanie nowych wierszy. Aby wprowadzone zmiany by³y widoczne w bazie danych konieczne jest naciœniêcie przycisku „Zapisz zmiany”. Zostaje wtedy uruchomiona metoda SaveChanges. Dla ka¿dej ksi¹¿ki w ObservableCollection<Book> _books zostaje wykonana komenda, która wyszukuje ksi¹¿kê po jej ID (query = "SELECT COUNT(1) FROM book_tbl WHERE BookID=@BookID") i aktualizuje jej dane wed³ug informacji zawartych w tabeli (UPDATE book_tbl) lub jeœli ksi¹¿ka nie zosta³a odnaleziona, dodaje j¹ do bazy danych (insert into book_tbl).
+	Usuwanie ksi¹¿ki polega na tym, ¿e po po³¹czeniu z baz¹, zostaje wyszukana wybrana ksi¹¿ka  po ID, nastêpnie usuniêta z bazy (string query = "DELETE FROM book_tbl WHERE BookID=@BookID").
+	Ksi¹¿kê mo¿na wypo¿yczyæ tylko tym u¿ytkownikom, którzy wczeœniej j¹ zarezerwowali. Po zweryfikowaniu tej informacji nastêpuje wyszukanie w bazie danych miejsca na zapisanie informacji o wypo¿yczonej ksi¹¿ce przez u¿ytkownika. Jeœli u¿ytkownik ma ju¿ wypo¿yczone 5 ksi¹¿ek, nie jest to mo¿liwe. W przeciwnym wypadku nastêpuje wypo¿yczenie ksi¹¿ki (zaktualizowanie informacji o wypo¿yczonych ksi¹¿kach, zmianie statusu ksi¹¿ki na „borrowed” i zwiêkszenie iloœci wypo¿yczeñ ksi¹¿ki, które jest brane pod uwagê w rankingu najpopularniejszych ksi¹¿ek).
+
+Tetris
+Tryb singleplayer
+	P³ynnoœæ opadania uzyska³am dziêki podzieleniu planszy na wiele niskich wierszy. Ich iloœæ mo¿na zwiêkszyæ przy zachowaniu tej samej rzeczywistej iloœci wierszy dziêki zmiennej fluentMoveRate. Zrezygnowa³am z p³ynnego przesuwania, poniewa¿ spowodowa³oby du¿y problem z koñcowym umieszczeniem klocka i sterowaniem. Nale¿a³oby i tak dorównaæ do lewej lub prawej kratki.
+Przesuwanie klocka odbywa siê dziêki stoperowi. Z ka¿dym zdarzeniem "TimerTick" klocek wymazuje siê i, jeœli mo¿e, przesuwa siê o kratkê ni¿ej. Zdarzenie ma miejsce co okreœlony czas ustalony zmiennymi timeSpan i superSpeed. Zwiêkszanie poziomu trudnoœci odbywa siê co difficultyRate taktów zegara.
+Prywatne pola, do których dostêpu potrzebuj¹ inne klasy, maj¹ metody publiczne zwracaj¹ce ich wartoœæ lub odpowiadaj¹ce im publiczne pola z opcjami get i set.
+Informacje, które nie mog¹ przepaœæ po zamkniêciu programu s¹ przechowywane w bazie danych SQLExpress, uaktualniane i pobierane, gdy s¹ potrzebne.
+
+
+Tryb multiplayer
+Przy tworzeniu multiplayera zdecydowanie powinnam u¿yæ dziedziczenia i klasy GameViewModel, jednak przez niekoniecznie dobre rozplanowanie jej musia³am kopiowaæ i dostosowywaæ jej metody. Dla poprawienia czytelnoœci klasy MultiplayerViewModel podzieli³am pola i metody na nale¿¹ce do pierwszego i drugiego gracza z zachowaniem kolejnoœci ich wystêpowania, a tak¿e ogólne informacje o grze wspólne dla obu graczy. Dziêki takiemu rozdzieleniu dwuosobowa gra to dwie, praktycznie niezale¿ne od siebie rozgrywki. £¹czy je sterowanie z jednego komputera i koniec gry, gdy jeden z graczy przegra.
+Logowanie drugiego gracza odbywa siê jak logowanie u¿ytkownika do aplikacji. Po zalogowaniu od razu otwiera siê gra i mo¿na j¹ rozpocz¹æ.
