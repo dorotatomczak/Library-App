@@ -65,7 +65,7 @@
                 <!--Game area-->
 
                 <Grid x:Name="gameArea" Grid.Column="0" Grid.Row="1" Focusable="True">
-                   
+
                     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <ItemsControl ItemsSource="{Binding Board, Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}" 
@@ -116,8 +116,5 @@
 
             </Grid>
         </Border>
-
-        <!--Go to Register Page-->
-
     </Grid>
 </UserControl>

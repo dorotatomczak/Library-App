@@ -16,7 +16,7 @@ namespace Library
 
         private NavigationViewModel _navigationViewModel;
 
-        public UserMenuViewModel (NavigationViewModel nvm)
+        public UserMenuViewModel(NavigationViewModel nvm)
         {
             _navigationViewModel = nvm;
             ShowAccountCommand = new BaseCommand(OpenAccount);
@@ -48,7 +48,7 @@ namespace Library
                     ((GameViewModel)(_navigationViewModel.SelectedViewModel)).dispatcherTimer.Tick -= ((GameViewModel)(_navigationViewModel.SelectedViewModel)).TimeTick;
                 }
             }
-               
+
             _navigationViewModel.SelectedViewModel = new BooksViewModel();
         }
 

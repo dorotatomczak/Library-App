@@ -156,7 +156,7 @@ namespace Library
                         for (int a = 0; a < fluentMoveRate; a++)
                         {
                             if ((int)(position.Y) + i * fluentMoveRate + a >= rows || (int)(position.X) + j >= cols
-                                || (int)(position.Y) + i * fluentMoveRate + a < 0 || (int)(position.X) + j < 0) break;
+                                || (int)(position.Y) + i * fluentMoveRate + a < 0 || (int)(position.X) + j < 0) continue;
                             if (board[(int)(position.Y) + i * fluentMoveRate + a][(int)(position.X) + j] != noBrush)
                             {
                                 canBeDrawn = false;
@@ -176,6 +176,8 @@ namespace Library
                         {
                             for (int k = 0; k < fluentMoveRate; k++)
                             {
+                                if ((int)(j * fluentMoveRate + position.Y + k) >= rows || (int)(i + position.X) >= cols
+                                || (int)(j * fluentMoveRate + position.Y + k) < 0 || (int)(i + position.X) < 0) continue;
                                 board[(int)(j * fluentMoveRate + position.Y + k)][(int)(i + position.X)] = color;
                             }
                         }
@@ -573,7 +575,7 @@ namespace Library
                     cmd.Parameters.AddWithValue("@Login", User.Username);
                     cmd.ExecuteNonQuery();
 
-                    MessageBox.Show(string.Format("Czy czytałeś już książkę: {0}?", title));
+                    MessageBox.Show(string.Format("Następny poziom!\nCzy czytałeś już książkę o tytule: {0}?", title));
                 }
                 catch (Exception ex)
                 {

@@ -952,8 +952,8 @@ namespace Library
             DispatcherTimer1Setup();
             DispatcherTimer2Setup();
             this.Level = 1;
-            this.score1 = 0;
-            this.score2 = 0;
+            this.Score1 = 0;
+            this.Score2 = 0;
             gameover1 = false;
             gameover2 = false;
             difficultyLevel = 1;
